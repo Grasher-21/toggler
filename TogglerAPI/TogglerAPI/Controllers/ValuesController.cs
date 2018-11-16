@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DatabaseGateway.SQL;
+using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
 namespace TogglerAPI.Controllers
@@ -7,6 +8,10 @@ namespace TogglerAPI.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        public ValuesController(ISQLConnection sqlConnection)
+        {
+        }
+
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
