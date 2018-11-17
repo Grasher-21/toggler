@@ -2,14 +2,12 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Text;
 
 namespace DatabaseGateway.SQL
 {
     public class SQLConnection : ISQLConnection
     {
-        private readonly SqlConnection SqlConnection;
-        private string ConnectionString;
+        private readonly string ConnectionString;
 
         public SQLConnection(string connectionString)
         {
@@ -21,27 +19,11 @@ namespace DatabaseGateway.SQL
             ConnectionString = connectionString;
         }
 
-        private void OpenConnection()
-        {
-            if (SqlConnection != null)
-            {
-                SqlConnection.Open();
-            }
-        }
-
-        private void CloseConnection()
-        {
-            if (SqlConnection != null)
-            {
-                SqlConnection.Close();
-            }
-        }
-
         public int ExecuteStoredProcedure(string storedProcedure, Dictionary<string, string> parameters)
         {
             using (SqlConnection connection = new SqlConnection(ConnectionString))
             {
-                using (var command = new SqlCommand("ProcedureName", SqlConnection) { CommandType = CommandType.StoredProcedure })
+                using (var command = new SqlCommand("ProcedureName", connection) { CommandType = CommandType.StoredProcedure })
                 {
                     if (parameters != null)
                     {
@@ -52,11 +34,11 @@ namespace DatabaseGateway.SQL
                         }
                     }
 
-                    OpenConnection();
+                    connection.Open();
 
                     int result = command.ExecuteNonQuery();
 
-                    CloseConnection();
+                    connection.Close();
 
                     return result;
                 }
