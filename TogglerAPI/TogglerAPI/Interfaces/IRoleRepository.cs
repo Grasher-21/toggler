@@ -5,10 +5,10 @@ namespace TogglerAPI.Interfaces
 {
     public interface IRoleRepository
     {
-        int CreateRole(string name, string description);
-        bool UpdateRole(int id, string name, string description);
+        int CreateRole(RoleModel roleModel);
         bool DeleteRole(int id);
         RoleModel GetRole(int id);
         List<RoleModel> GetRoleList();
+        bool UpdateRole(RoleModel roleModel);
     }
 }

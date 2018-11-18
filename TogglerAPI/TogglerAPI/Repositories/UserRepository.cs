@@ -1,19 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using TogglerAPI.Models;
-using TogglerAPI.Utilities;
 using TogglerAPI.Interfaces;
+using TogglerAPI.Models;
 
 namespace TogglerAPI.Repositories
 {
     public class UserRepository : IUserRepository
     {
         private readonly TogglerContext TogglerContext;
+        private readonly ILogger Logger;
 
-        public UserRepository(TogglerContext togglerContext)
+        public UserRepository(TogglerContext togglerContext, ILogger logger)
         {
             TogglerContext = togglerContext;
+            Logger = logger;
         }
 
         public int CreateUser(int roleId, string username, string password)
@@ -52,15 +53,20 @@ namespace TogglerAPI.Repositories
             }
             catch (Exception ex)
             {
-                LoggerFile.LogFile($"Failed to delete the User: {ex.Message}");
+                Logger.LogFile($"Failed to delete the User: {ex.Message}");
 
                 return false;
             }
         }
 
-        public UserModel GetUser(int id)
+        public UserModel GetUserById(int id)
         {
             return TogglerContext.Users.Find(id);
+        }
+
+        public UserModel GetUserByUsername(string username)
+        {
+            return TogglerContext.Users.Where(u => u.Username == username).FirstOrDefault();
         }
 
         public List<UserModel> GetUserList()
@@ -88,7 +94,7 @@ namespace TogglerAPI.Repositories
             }
             catch (Exception ex)
             {
-                LoggerFile.LogFile($"Failed to update the User: {ex.Message}");
+                Logger.LogFile($"Failed to update the User: {ex.Message}");
             }
 
             return false;

@@ -3,32 +3,42 @@ using System.Collections.Generic;
 using System.Linq;
 using TogglerAPI.Interfaces;
 using TogglerAPI.Models;
-using TogglerAPI.Utilities;
 
 namespace TogglerAPI.Repositories
 {
     public class RoleRepository : IRoleRepository
     {
         private readonly TogglerContext TogglerContext;
+        private readonly ILogger Logger;
 
-        public RoleRepository(TogglerContext togglerContext)
+        public RoleRepository(TogglerContext togglerContext, ILogger logger)
         {
             TogglerContext = togglerContext;
+            Logger = logger;
         }
 
-        public int CreateRole(string name, string description)
+        public int CreateRole(RoleModel roleModel)
         {
-            if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(description))
+            if (roleModel == null || string.IsNullOrWhiteSpace(roleModel.Name) || string.IsNullOrWhiteSpace(roleModel.Description))
             {
                 throw new ArgumentNullException();
             }
 
-            RoleModel role = new RoleModel() { Name = name, Description = description };
+            try
+            {
+                RoleModel role = new RoleModel() { Name = roleModel.Name, Description = roleModel.Description };
 
-            TogglerContext.Roles.Add(role);
-            TogglerContext.SaveChanges();
+                TogglerContext.Roles.Add(role);
+                TogglerContext.SaveChanges();
 
-            return role.RoleId;
+                return role.RoleId;
+            }
+            catch (Exception ex)
+            {
+                Logger.LogFile($"Failed to create the Role: {ex.Message}");
+
+                return -1;
+            }
         }
 
         public bool DeleteRole(int id)
@@ -45,7 +55,7 @@ namespace TogglerAPI.Repositories
             }
             catch (Exception ex)
             {
-                LoggerFile.LogFile($"Failed to delete the Role: {ex.Message}");
+                Logger.LogFile($"Failed to delete the Role: {ex.Message}");
 
                 return false;
             }
@@ -61,16 +71,21 @@ namespace TogglerAPI.Repositories
             return TogglerContext.Roles.ToList();
         }
 
-        public bool UpdateRole(int id, string name, string description)
+        public bool UpdateRole(RoleModel roleModel)
         {
-            RoleModel role = TogglerContext.Roles.Find(id);
+            if (roleModel == null || string.IsNullOrWhiteSpace(roleModel.Name) || string.IsNullOrWhiteSpace(roleModel.Description))
+            {
+                throw new ArgumentNullException();
+            }
 
             try
             {
+                RoleModel role = TogglerContext.Roles.Find(roleModel.RoleId);
+
                 if (role != null)
                 {
-                    role.Name = name;
-                    role.Description = description;
+                    role.Name = roleModel.Name;
+                    role.Description = roleModel.Description;
 
                     TogglerContext.Roles.Update(role);
                     TogglerContext.SaveChanges();
@@ -80,7 +95,7 @@ namespace TogglerAPI.Repositories
             }
             catch (Exception ex)
             {
-                LoggerFile.LogFile($"Failed to update the Role: {ex.Message}");
+                Logger.LogFile($"Failed to update the Role: {ex.Message}");
             }
 
             return false;

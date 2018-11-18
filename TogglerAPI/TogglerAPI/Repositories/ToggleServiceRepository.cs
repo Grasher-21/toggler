@@ -4,17 +4,18 @@ using System.Linq;
 using TogglerAPI.Enums;
 using TogglerAPI.Interfaces;
 using TogglerAPI.Models;
-using TogglerAPI.Utilities;
 
 namespace TogglerAPI.Repositories
 {
     public class ToggleServiceRepository : IToggleServiceRepository
     {
         private readonly TogglerContext TogglerContext;
+        private readonly ILogger Logger;
 
-        public ToggleServiceRepository(TogglerContext togglerContext)
+        public ToggleServiceRepository(TogglerContext togglerContext, ILogger logger)
         {
             TogglerContext = togglerContext;
+            Logger = logger;
         }
 
         public bool CreatePermission(int toggleId, Guid serviceId, State state, bool overridenValue)
@@ -36,7 +37,7 @@ namespace TogglerAPI.Repositories
             }
             catch (Exception ex)
             {
-                LoggerFile.LogFile($"Failed to create the ToggleServicePermission: {ex.Message}");
+                Logger.LogFile($"Failed to create the ToggleServicePermission: {ex.Message}");
 
                 throw new Exception(ex.Message);
             }
@@ -60,7 +61,7 @@ namespace TogglerAPI.Repositories
             }
             catch (Exception ex)
             {
-                LoggerFile.LogFile($"Failed to delete the ToggleServicePermission: {ex.Message}");
+                Logger.LogFile($"Failed to delete the ToggleServicePermission: {ex.Message}");
 
                 return false;
             }
@@ -95,7 +96,7 @@ namespace TogglerAPI.Repositories
             }
             catch (Exception ex)
             {
-                LoggerFile.LogFile($"Failed to update the ToggleServicePermission: {ex.Message}");
+                Logger.LogFile($"Failed to update the ToggleServicePermission: {ex.Message}");
             }
 
             return false;

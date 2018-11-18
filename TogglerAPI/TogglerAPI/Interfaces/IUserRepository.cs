@@ -8,7 +8,8 @@ namespace TogglerAPI.Interfaces
         int CreateUser(int roleId, string username, string password);
         bool UpdateUser(int id, int roleId, string password);
         bool DeleteUser(int id);
-        UserModel GetUser(int id);
+        UserModel GetUserById(int id);
+        UserModel GetUserByUsername(string username);
         List<UserModel> GetUserList();
     }
 }

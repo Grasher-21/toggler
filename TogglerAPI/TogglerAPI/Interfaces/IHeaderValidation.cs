@@ -2,6 +2,7 @@
 {
     public interface IHeaderValidation
     {
-        bool ValidateUserCredentials(string username, string password);
+        int ValidateUserCredentials(string username, string password);
+        bool ValidateUserPermissions(int roleId);
     }
 }

@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using TogglerAPI.Interfaces;
 using TogglerAPI.Models;
-using TogglerAPI.Utilities;
 
 namespace TogglerAPI.Repositories
 {
     public class ServiceRepository : IServiceRepository
     {
         private readonly TogglerContext TogglerContext;
+        private readonly ILogger Logger;
 
-        public ServiceRepository(TogglerContext togglerContext)
+        public ServiceRepository(TogglerContext togglerContext, ILogger logger)
         {
             TogglerContext = togglerContext;
+            Logger = logger;
         }
 
         public Guid CreateService(string name, string version)
@@ -50,7 +51,7 @@ namespace TogglerAPI.Repositories
             }
             catch (Exception ex)
             {
-                LoggerFile.LogFile($"Failed to delete the Service: {ex.Message}");
+                Logger.LogFile($"Failed to delete the Service: {ex.Message}");
 
                 return false;
             }
@@ -85,7 +86,7 @@ namespace TogglerAPI.Repositories
             }
             catch (Exception ex)
             {
-                LoggerFile.LogFile($"Failed to update the Service: {ex.Message}");
+                Logger.LogFile($"Failed to update the Service: {ex.Message}");
             }
 
             return false;

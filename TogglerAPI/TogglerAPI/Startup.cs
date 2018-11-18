@@ -8,6 +8,7 @@ using TogglerAPI.BusinessCore;
 using TogglerAPI.Interfaces;
 using TogglerAPI.Models;
 using TogglerAPI.Repositories;
+using TogglerAPI.Utilities;
 
 namespace TogglerAPI
 {
@@ -29,7 +30,12 @@ namespace TogglerAPI
 
             services.AddEntityFrameworkSqlServer();
 
+            services.AddScoped<ILogger>(x => new Logger(Configuration.GetSection("LoggerFile").Value));
+
             services.AddScoped<IHeaderValidation, HeaderValidation>();
+            services.AddScoped<IRoleService, RoleService>();
+            services.AddScoped<IUserService, UserService>();
+
             services.AddScoped<IRoleRepository, RoleRepository>();
             services.AddScoped<IServiceRepository, ServiceRepository>();
             services.AddScoped<IToggleRepository, ToggleRepository>();

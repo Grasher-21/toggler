@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using TogglerAPI.Interfaces;
 using TogglerAPI.Models;
-using TogglerAPI.Utilities;
 
 namespace TogglerAPI.Repositories
 {
     public class ToggleRepository : IToggleRepository
     {
         private readonly TogglerContext TogglerContext;
+        private readonly ILogger Logger;
 
-        public ToggleRepository(TogglerContext togglerContext)
+        public ToggleRepository(TogglerContext togglerContext, ILogger logger)
         {
             TogglerContext = togglerContext;
+            Logger = logger;
         }
 
         public int CreateToggle(string name, bool value)
@@ -45,7 +46,7 @@ namespace TogglerAPI.Repositories
             }
             catch (Exception ex)
             {
-                LoggerFile.LogFile($"Failed to delete the Toggle: {ex.Message}");
+                Logger.LogFile($"Failed to delete the Toggle: {ex.Message}");
 
                 return false;
             }
@@ -80,7 +81,7 @@ namespace TogglerAPI.Repositories
             }
             catch (Exception ex)
             {
-                LoggerFile.LogFile($"Failed to update the Toggle: {ex.Message}");
+                Logger.LogFile($"Failed to update the Toggle: {ex.Message}");
             }
 
             return false;

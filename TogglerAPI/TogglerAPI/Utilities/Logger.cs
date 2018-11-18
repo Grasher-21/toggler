@@ -1,17 +1,24 @@
 ﻿using Microsoft.Extensions.Configuration;
 using System;
 using System.IO;
+using TogglerAPI.Interfaces;
 
 namespace TogglerAPI.Utilities
 {
-    public static class LoggerFile
+    public class Logger : ILogger
     {
-        private static readonly string LogFolderName = "LOGS";
-        private static readonly string LogFileName = "LogFile.txt";
-        private static readonly object LogFileLockObject = new object();
-        private static IConfiguration Configuration => Configuration;
+        private readonly string LogFolderName = "LOGS";
+        private readonly string LogFileName = "LogFile.txt";
+        private readonly object LogFileLockObject = new object();
+        private IConfiguration Configuration => Configuration;
+        public string LoggerFile;
 
-        public static void LogFile(string message)
+        public Logger(string loggerFile)
+        {
+            LoggerFile = loggerFile;
+        }
+
+        public void LogFile(string message)
         {
             if (GetLogFileStatus())
             {
@@ -30,18 +37,16 @@ namespace TogglerAPI.Utilities
 
                     using (StreamWriter streamWriter = File.AppendText(fileName))
                     {
-                        streamWriter.WriteLine(message);
+                        streamWriter.WriteLine($"{DateTime.UtcNow}: {message}");
                         streamWriter.Flush();
                     }
                 }
             }
         }
 
-        private static bool GetLogFileStatus()
+        private bool GetLogFileStatus()
         {
-            string logFile = Configuration.GetSection("LoggerFile").Value;
-
-            if (logFile.Equals("true"))
+            if (LoggerFile.Equals("true"))
             {
                 return true;
             }
