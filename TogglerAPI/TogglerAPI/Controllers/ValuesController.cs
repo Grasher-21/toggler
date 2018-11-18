@@ -8,16 +8,20 @@ namespace TogglerAPI.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
-        public ValuesController(ITogglerDbContext togglerContext)
+        private readonly IRoleRepository RoleRepository;
+
+        public ValuesController(IRoleRepository repository)
         {
-            togglerContext.Test();
+            RoleRepository = repository;
         }
 
         // GET api/values
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
-            return new string[] { "value1", "value2" };
+            var result = RoleRepository.DeleteRole(1);
+
+            return new string[] { "value1", "value2", result.ToString() };
         }
 
         // GET api/values/5
