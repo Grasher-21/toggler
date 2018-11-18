@@ -9,21 +9,27 @@ Remove-Migration
 
 use Toggler
 
-INSERT INTO [dbo].[Roles] ([Name] ,[Description]) VALUES ('Administrator', 'Administrator which can do CRUD of evertything')
-INSERT INTO [dbo].[Roles] ([Name] ,[Description]) VALUES ('Guest', 'Guest which can do nothing I guess')
+INSERT INTO [dbo].[Roles] ([Name] ,[Description]) VALUES ('Administrator', 'Administrator')
+INSERT INTO [dbo].[Roles] ([Name] ,[Description]) VALUES ('Guest', 'Guest')
 select * from roles
 
-INSERT INTO [dbo].[Users] ([RoleId] ,[Username] ,[Password]) VALUES (1, 'Grasher', 'Password')
-INSERT INTO [dbo].[Users] ([RoleId] ,[Username] ,[Password]) VALUES (2, 'Grasher25', 'Password')
-
+INSERT INTO [dbo].[Users] ([RoleId] ,[Username] ,[Password]) VALUES (1, 'GrasherAdmin', 'Password')
+INSERT INTO [dbo].[Users] ([RoleId] ,[Username] ,[Password]) VALUES (2, 'GrasherGuest', 'Password')
 select * from users
 
+INSERT INTO [dbo].[Toggles]([Name],[Value]) VALUES('isButtonBlue', 0)
+INSERT INTO [dbo].[Toggles]([Name],[Value]) VALUES('isButtonRed', 1)
+INSERT INTO [dbo].[Toggles]([Name],[Value]) VALUES('isButtonPurple', 1)
+INSERT INTO [dbo].[Toggles]([Name],[Value]) VALUES('isButtonBrown', 0)
+select * from Toggles
 
-select *
-from Users u
-left join roles r
-on u.RoleId = r.RoleId
+INSERT INTO [dbo].[Services]([Name],[Version]) VALUES('XPTO', '1.0.1')
+INSERT INTO [dbo].[Services]([Name],[Version]) VALUES('QWER', '6.3.3')
+INSERT INTO [dbo].[Services]([Name],[Version]) VALUES('ROTP', '2.6.1')
+select * from services
 
+select * from Toggles
+select * from services
 
-select * from Roles
-select * from users
+INSERT INTO [dbo].[ToggleServicePermissions] values (1,'CB31FC73-5CEB-E811-97B4-7824AF3635B8',1,0)
+select * from ToggleServicePermissions

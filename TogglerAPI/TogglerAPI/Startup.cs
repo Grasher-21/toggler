@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using TogglerAPI.BusinessCore;
 using TogglerAPI.Interfaces;
 using TogglerAPI.Models;
 using TogglerAPI.Repositories;
@@ -28,8 +29,12 @@ namespace TogglerAPI
 
             services.AddEntityFrameworkSqlServer();
 
+            services.AddScoped<IHeaderValidation, HeaderValidation>();
             services.AddScoped<IRoleRepository, RoleRepository>();
             services.AddScoped<IServiceRepository, ServiceRepository>();
+            services.AddScoped<IToggleRepository, ToggleRepository>();
+            services.AddScoped<IToggleServiceRepository, ToggleServiceRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
@@ -46,7 +51,7 @@ namespace TogglerAPI
                 app.UseHsts();
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseMvc();
         }
     }

@@ -5,7 +5,7 @@ using TogglerAPI.Enums;
 
 namespace TogglerAPI.Models
 {
-    public class ToggleServicePermission
+    public class ToggleServicePermissionModel
     {
         [ForeignKey("Toggles"), Column(Order = 0)]
         public int ToggleId { get; set; }

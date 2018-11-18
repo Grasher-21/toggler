@@ -42,7 +42,7 @@ namespace TogglerAPI.Migrations
                 name: "Services",
                 columns: table => new
                 {
-                    ServiceId = table.Column<Guid>(nullable: false),
+                    ServiceId = table.Column<Guid>(nullable: false, defaultValueSql: "newsequentialid()"),
                     Name = table.Column<string>(nullable: false),
                     Version = table.Column<string>(nullable: false)
                 },
@@ -76,6 +76,7 @@ namespace TogglerAPI.Migrations
                 },
                 constraints: table =>
                 {
+                    table.PrimaryKey("PK_ToggleServicePermissions_ToggleIdServiceId", x => new { x.ToggleId, x.ServiceId });
                     table.ForeignKey("FK_ToggleServicePermissions_ToggleId", x => x.ToggleId, "Toggles", "ToggleId", onDelete: ReferentialAction.Cascade);
                     table.ForeignKey("FK_ToggleServicePermissions_ServiceId", x => x.ServiceId, "Services", "ServiceId", onDelete: ReferentialAction.Cascade);
                 });

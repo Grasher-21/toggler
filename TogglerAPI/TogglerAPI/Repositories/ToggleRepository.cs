@@ -23,7 +23,7 @@ namespace TogglerAPI.Repositories
                 throw new ArgumentNullException();
             }
 
-            Toggle Toggle = new Toggle() { Name = name, Value = value };
+            ToggleModel Toggle = new ToggleModel() { Name = name, Value = value };
 
             TogglerContext.Toggles.Add(Toggle);
             TogglerContext.SaveChanges();
@@ -35,7 +35,7 @@ namespace TogglerAPI.Repositories
         {
             try
             {
-                Toggle Toggle = new Toggle() { ToggleId = id };
+                ToggleModel Toggle = new ToggleModel() { ToggleId = id };
 
                 TogglerContext.Toggles.Attach(Toggle);
                 TogglerContext.Toggles.Remove(Toggle);
@@ -51,19 +51,19 @@ namespace TogglerAPI.Repositories
             }
         }
 
-        public Toggle GetToggle(int id)
+        public ToggleModel GetToggle(int id)
         {
             return TogglerContext.Toggles.Find(id);
         }
 
-        public List<Toggle> GetToggleList()
+        public List<ToggleModel> GetToggleList()
         {
             return TogglerContext.Toggles.ToList();
         }
 
         public bool UpdateToggle(int id, string name, bool value)
         {
-            Toggle toggle = TogglerContext.Toggles.Find(id);
+            ToggleModel toggle = TogglerContext.Toggles.Find(id);
 
             try
             {

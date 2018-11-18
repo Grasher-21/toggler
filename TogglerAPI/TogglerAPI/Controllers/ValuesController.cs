@@ -19,9 +19,9 @@ namespace TogglerAPI.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<string>> Get()
         {
-            var result = RoleRepository.DeleteRole(1);
+            //var result = RoleRepository.DeleteRole(1);
 
-            return new string[] { "value1", "value2", result.ToString() };
+            return new string[] { "value1", "value2" };
         }
 
         // GET api/values/5
@@ -33,8 +33,9 @@ namespace TogglerAPI.Controllers
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ActionResult<string> Post([FromBody] string value)
         {
+            return value;
         }
 
         // PUT api/values/5

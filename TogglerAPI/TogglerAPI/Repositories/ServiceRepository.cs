@@ -23,7 +23,7 @@ namespace TogglerAPI.Repositories
                 throw new ArgumentNullException();
             }
 
-            Service service = new Service() { Name = name, Version = version };
+            ServiceModel service = new ServiceModel() { Name = name, Version = version };
 
             TogglerContext.Services.Add(service);
             TogglerContext.SaveChanges();
@@ -40,7 +40,7 @@ namespace TogglerAPI.Repositories
 
             try
             {
-                Service service = new Service() { ServiceId = id };
+                ServiceModel service = new ServiceModel() { ServiceId = id };
 
                 TogglerContext.Services.Attach(service);
                 TogglerContext.Services.Remove(service);
@@ -56,19 +56,19 @@ namespace TogglerAPI.Repositories
             }
         }
 
-        public Service GetService(Guid id)
+        public ServiceModel GetService(Guid id)
         {
             return TogglerContext.Services.Find(id);
         }
 
-        public List<Service> GetServiceList()
+        public List<ServiceModel> GetServiceList()
         {
             return TogglerContext.Services.ToList();
         }
 
         public bool UpdateService(Guid id, string name, string version)
         {
-            Service service = TogglerContext.Services.Find(id);
+            ServiceModel service = TogglerContext.Services.Find(id);
 
             try
             {

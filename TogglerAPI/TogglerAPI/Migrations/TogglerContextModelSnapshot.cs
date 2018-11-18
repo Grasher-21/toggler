@@ -19,7 +19,7 @@ namespace TogglerAPI.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("TogglerAPI.Models.Role", b =>
+            modelBuilder.Entity("TogglerAPI.Models.RoleModel", b =>
                 {
                     b.Property<int>("RoleId")
                         .ValueGeneratedOnAdd()
@@ -36,11 +36,10 @@ namespace TogglerAPI.Migrations
                     b.ToTable("Roles");
                 });
 
-            modelBuilder.Entity("TogglerAPI.Models.Service", b =>
+            modelBuilder.Entity("TogglerAPI.Models.ServiceModel", b =>
                 {
                     b.Property<Guid>("ServiceId")
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValueSql("NEWID()");
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Name")
                         .IsRequired();
@@ -53,7 +52,7 @@ namespace TogglerAPI.Migrations
                     b.ToTable("Services");
                 });
 
-            modelBuilder.Entity("TogglerAPI.Models.Toggle", b =>
+            modelBuilder.Entity("TogglerAPI.Models.ToggleModel", b =>
                 {
                     b.Property<int>("ToggleId")
                         .ValueGeneratedOnAdd()
@@ -69,7 +68,7 @@ namespace TogglerAPI.Migrations
                     b.ToTable("Toggles");
                 });
 
-            modelBuilder.Entity("TogglerAPI.Models.ToggleServicePermission", b =>
+            modelBuilder.Entity("TogglerAPI.Models.ToggleServicePermissionModel", b =>
                 {
                     b.Property<int>("ToggleId");
 
@@ -84,7 +83,7 @@ namespace TogglerAPI.Migrations
                     b.ToTable("ToggleServicePermissions");
                 });
 
-            modelBuilder.Entity("TogglerAPI.Models.User", b =>
+            modelBuilder.Entity("TogglerAPI.Models.UserModel", b =>
                 {
                     b.Property<int>("UserId")
                         .ValueGeneratedOnAdd()

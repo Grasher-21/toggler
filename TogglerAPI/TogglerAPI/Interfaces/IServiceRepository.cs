@@ -9,7 +9,7 @@ namespace TogglerAPI.Interfaces
         Guid CreateService(string name, string version);
         bool UpdateService(Guid id, string name, string description);
         bool DeleteService(Guid id);
-        Service GetService(Guid id);
-        List<Service> GetServiceList();
+        ServiceModel GetService(Guid id);
+        List<ServiceModel> GetServiceList();
     }
 }

@@ -23,7 +23,7 @@ namespace TogglerAPI.Repositories
                 throw new ArgumentNullException();
             }
 
-            Role role = new Role() { Name = name, Description = description };
+            RoleModel role = new RoleModel() { Name = name, Description = description };
 
             TogglerContext.Roles.Add(role);
             TogglerContext.SaveChanges();
@@ -35,7 +35,7 @@ namespace TogglerAPI.Repositories
         {
             try
             {
-                Role role = new Role() { RoleId = id };
+                RoleModel role = new RoleModel() { RoleId = id };
 
                 TogglerContext.Roles.Attach(role);
                 TogglerContext.Roles.Remove(role);
@@ -51,19 +51,19 @@ namespace TogglerAPI.Repositories
             }
         }
 
-        public Role GetRole(int id)
+        public RoleModel GetRole(int id)
         {
             return TogglerContext.Roles.Find(id);
         }
 
-        public List<Role> GetRoleList()
+        public List<RoleModel> GetRoleList()
         {
             return TogglerContext.Roles.ToList();
         }
 
         public bool UpdateRole(int id, string name, string description)
         {
-            Role role = TogglerContext.Roles.Find(id);
+            RoleModel role = TogglerContext.Roles.Find(id);
 
             try
             {

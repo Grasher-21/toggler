@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TogglerAPI.Models
 {
-    public class Service
+    public class ServiceModel
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

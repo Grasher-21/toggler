@@ -3,16 +3,16 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace TogglerAPI.Models
 {
-    public class Role
+    public class ToggleModel
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int RoleId { get; set; }
+        public int ToggleId { get; set; }
 
         [Required]
         public string Name { get; set; }
 
         [Required]
-        public string Description { get; set; }
+        public bool Value { get; set; }
     }
 }

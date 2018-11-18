@@ -8,7 +8,7 @@ namespace TogglerAPI.Interfaces
         int CreateRole(string name, string description);
         bool UpdateRole(int id, string name, string description);
         bool DeleteRole(int id);
-        Role GetRole(int id);
-        List<Role> GetRoleList();
+        RoleModel GetRole(int id);
+        List<RoleModel> GetRoleList();
     }
 }

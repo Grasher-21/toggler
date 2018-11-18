@@ -8,17 +8,16 @@ namespace TogglerAPI.Models
         {
         }
 
-        public DbSet<Role> Roles { get; set; }
-        public DbSet<User> Users { get; set; }
-        public DbSet<Toggle> Toggles { get; set; }
-        public DbSet<Service> Services { get; set; }
-        public DbSet<ToggleServicePermission> ToggleServicePermissions { get; set; }
+        public DbSet<RoleModel> Roles { get; set; }
+        public DbSet<UserModel> Users { get; set; }
+        public DbSet<ToggleModel> Toggles { get; set; }
+        public DbSet<ServiceModel> Services { get; set; }
+        public DbSet<ToggleServicePermissionModel> ToggleServicePermissions { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<User>().HasIndex(u => u.Username).IsUnique();
-            modelBuilder.Entity<Service>().Property(x => x.ServiceId).HasDefaultValueSql("NEWID()");
-            modelBuilder.Entity<ToggleServicePermission>().HasKey(t => new { t.ToggleId, t.ServiceId });
+            modelBuilder.Entity<UserModel>().HasIndex(u => u.Username).IsUnique();
+            modelBuilder.Entity<ToggleServicePermissionModel>().HasKey(t => new { t.ToggleId, t.ServiceId });
         }
     }
 }

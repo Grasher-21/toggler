@@ -8,7 +8,7 @@ namespace TogglerAPI.Interfaces
         int CreateToggle(string name, bool value);
         bool UpdateToggle(int id, string name, bool value);
         bool DeleteToggle(int id);
-        Toggle GetToggle(int id);
-        List<Toggle> GetToggleList();
+        ToggleModel GetToggle(int id);
+        List<ToggleModel> GetToggleList();
     }
 }

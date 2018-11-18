@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using TogglerAPI.Models;
 using TogglerAPI.Utilities;
-using UserrAPI.Interfaces;
+using TogglerAPI.Interfaces;
 
 namespace TogglerAPI.Repositories
 {
@@ -23,14 +23,14 @@ namespace TogglerAPI.Repositories
                 throw new ArgumentNullException();
             }
 
-            Role role = TogglerContext.Roles.Find(roleId);
+            RoleModel role = TogglerContext.Roles.Find(roleId);
 
             if (role == null)
             {
                 throw new ArgumentException($"Couldn't find a Role with the ID {roleId}");
             }
 
-            User User = new User() { RoleId = roleId, Username = username, Password = password };
+            UserModel User = new UserModel() { RoleId = roleId, Username = username, Password = password };
 
             TogglerContext.Users.Add(User);
             TogglerContext.SaveChanges();
@@ -42,7 +42,7 @@ namespace TogglerAPI.Repositories
         {
             try
             {
-                User User = new User() { UserId = id };
+                UserModel User = new UserModel() { UserId = id };
 
                 TogglerContext.Users.Attach(User);
                 TogglerContext.Users.Remove(User);
@@ -58,20 +58,20 @@ namespace TogglerAPI.Repositories
             }
         }
 
-        public User GetUser(int id)
+        public UserModel GetUser(int id)
         {
             return TogglerContext.Users.Find(id);
         }
 
-        public List<User> GetUserList()
+        public List<UserModel> GetUserList()
         {
             return TogglerContext.Users.ToList();
         }
 
         public bool UpdateUser(int id, int roleId, string password)
         {
-            User user = TogglerContext.Users.Find(id);
-            Role role = TogglerContext.Roles.Find(roleId);
+            UserModel user = TogglerContext.Users.Find(id);
+            RoleModel role = TogglerContext.Roles.Find(roleId);
 
             try
             {
