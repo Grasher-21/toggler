@@ -20,7 +20,7 @@ namespace TogglerAPI.BusinessCore
 
         public int CreateRole(RoleRequestModel roleRequestModel)
         {
-            if (string.IsNullOrWhiteSpace(roleRequestModel.Name) || string.IsNullOrWhiteSpace(roleRequestModel.Description))
+            if (roleRequestModel == null || string.IsNullOrWhiteSpace(roleRequestModel.Name) || string.IsNullOrWhiteSpace(roleRequestModel.Description))
             {
                 return -1;
             }
@@ -79,7 +79,7 @@ namespace TogglerAPI.BusinessCore
             }
             catch (Exception ex)
             {
-                Logger.LogFile($"Error getting a role: {ex.Message}");
+                Logger.LogFile($"Error getting a role by id = {id}: {ex.Message}");
             }
 
             return null;

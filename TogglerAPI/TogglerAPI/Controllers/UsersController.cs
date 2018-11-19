@@ -8,23 +8,23 @@ namespace TogglerAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RolesController : ControllerBase
+    public class UsersController : ControllerBase
     {
         private readonly IHeaderValidation HeaderValidation;
-        private readonly IRoleService RoleService;
+        private readonly IUserService UserService;
         private readonly string Username = "Username";
         private readonly string Password = "Password";
 
-        public RolesController(IHeaderValidation headerValidation, IRoleService roleService)
+        public UsersController(IHeaderValidation headerValidation, IUserService userService)
         {
             HeaderValidation = headerValidation;
-            RoleService = roleService;
+            UserService = userService;
         }
 
         [HttpPost]
-        public ActionResult<int> CreateRole([FromBody] RoleRequestModel roleRequestModel)
+        public ActionResult<int> CreateUser([FromBody] UserRequestModel userRequestModel)
         {
-            if (roleRequestModel == null || string.IsNullOrWhiteSpace(roleRequestModel.Name) || string.IsNullOrWhiteSpace(roleRequestModel.Description))
+            if (userRequestModel == null || string.IsNullOrWhiteSpace(userRequestModel.Username) || string.IsNullOrWhiteSpace(userRequestModel.Password))
             {
                 return StatusCode(400);
             }
@@ -41,7 +41,7 @@ namespace TogglerAPI.Controllers
                 return StatusCode(403);
             }
 
-            result = RoleService.CreateRole(roleRequestModel);
+            result = UserService.CreateUser(userRequestModel);
 
             if (result == -1)
             {
@@ -52,7 +52,7 @@ namespace TogglerAPI.Controllers
         }
 
         [HttpDelete("{id}")]
-        public ActionResult DeleteRole(int id)
+        public ActionResult DeleteUser(int id)
         {
             int result = HeaderValidation.ValidateUserCredentials(Request.Headers[Username], Request.Headers[Password]);
 
@@ -66,7 +66,7 @@ namespace TogglerAPI.Controllers
                 return StatusCode(403);
             }
 
-            if (!RoleService.DeleteRole(id))
+            if (!UserService.DeleteUserById(id))
             {
                 return StatusCode(404);
             }
@@ -74,60 +74,11 @@ namespace TogglerAPI.Controllers
             return StatusCode(204);
         }
 
-        [HttpGet("{id}")]
-        public ActionResult<RoleResponseModel> GetRole(int id)
+        [HttpDelete]
+        [Route("username/{username}")]
+        public ActionResult DeleteUser(string username)
         {
-            int result = HeaderValidation.ValidateUserCredentials(Request.Headers[Username], Request.Headers[Password]);
-
-            if (result == -1)
-            {
-                return StatusCode(401);
-            }
-
-            if (!HeaderValidation.ValidateUserPermissions(result))
-            {
-                return StatusCode(403);
-            }
-
-            RoleResponseModel roleResponseModel = RoleService.GetRole(id);
-
-            if (roleResponseModel == null)
-            {
-                return StatusCode(404);
-            }
-
-            return StatusCode(200, roleResponseModel);
-        }
-
-        [HttpGet]
-        public ActionResult<List<RoleResponseModel>> GetRoleList()
-        {
-            int result = HeaderValidation.ValidateUserCredentials(Request.Headers[Username], Request.Headers[Password]);
-
-            if (result == -1)
-            {
-                return StatusCode(401);
-            }
-
-            if (!HeaderValidation.ValidateUserPermissions(result))
-            {
-                return StatusCode(403);
-            }
-
-            List<RoleResponseModel> roleList = RoleService.GetRoleList();
-
-            if (roleList == null)
-            {
-                return StatusCode(404);
-            }
-
-            return StatusCode(200, roleList);
-        }
-
-        [HttpPut]
-        public ActionResult UpdateRole([FromBody] RoleRequestModel role)
-        {
-            if (role?.RoleId == null || string.IsNullOrWhiteSpace(role.Name) || string.IsNullOrWhiteSpace(role.Description))
+            if (string.IsNullOrWhiteSpace(username))
             {
                 return StatusCode(400);
             }
@@ -144,7 +95,111 @@ namespace TogglerAPI.Controllers
                 return StatusCode(403);
             }
 
-            if (!RoleService.UpdateRole(role))
+            if (!UserService.DeleteUserByUsername(username))
+            {
+                return StatusCode(404);
+            }
+
+            return StatusCode(204);
+        }
+
+        [HttpGet("{id}")]
+        public ActionResult<UserResponseModel> GetUser(int id)
+        {
+            int result = HeaderValidation.ValidateUserCredentials(Request.Headers[Username], Request.Headers[Password]);
+
+            if (result == -1)
+            {
+                return StatusCode(401);
+            }
+
+            if (!HeaderValidation.ValidateUserPermissions(result))
+            {
+                return StatusCode(403);
+            }
+
+            UserResponseModel userResponseModel = UserService.GetUserById(id);
+
+            if (userResponseModel == null)
+            {
+                return StatusCode(404);
+            }
+
+            return StatusCode(200, userResponseModel);
+        }
+
+        [HttpGet]
+        [Route("username/{username}")]
+        public ActionResult<UserResponseModel> GetUser(string username)
+        {
+            int result = HeaderValidation.ValidateUserCredentials(Request.Headers[Username], Request.Headers[Password]);
+
+            if (result == -1)
+            {
+                return StatusCode(401);
+            }
+
+            if (!HeaderValidation.ValidateUserPermissions(result))
+            {
+                return StatusCode(403);
+            }
+
+            UserResponseModel userResponseModel = UserService.GetUserByUsername(username);
+
+            if (userResponseModel == null)
+            {
+                return StatusCode(404);
+            }
+
+            return StatusCode(200, userResponseModel);
+        }
+
+        [HttpGet]
+        public ActionResult<List<UserResponseModel>> GetUserList()
+        {
+            int result = HeaderValidation.ValidateUserCredentials(Request.Headers[Username], Request.Headers[Password]);
+
+            if (result == -1)
+            {
+                return StatusCode(401);
+            }
+
+            if (!HeaderValidation.ValidateUserPermissions(result))
+            {
+                return StatusCode(403);
+            }
+
+            List<UserResponseModel> userList = UserService.GetUserList();
+
+            if (userList == null)
+            {
+                return StatusCode(404);
+            }
+
+            return StatusCode(200, userList);
+        }
+
+        [HttpPut]
+        public ActionResult UpdateUser([FromBody] UserRequestModel user)
+        {
+            if (user?.UserId == null || string.IsNullOrWhiteSpace(user.Username) || string.IsNullOrWhiteSpace(user.Password))
+            {
+                return StatusCode(400);
+            }
+
+            int result = HeaderValidation.ValidateUserCredentials(Request.Headers[Username], Request.Headers[Password]);
+
+            if (result == -1)
+            {
+                return StatusCode(401);
+            }
+
+            if (!HeaderValidation.ValidateUserPermissions(result))
+            {
+                return StatusCode(403);
+            }
+
+            if (!UserService.UpdateUser(user))
             {
                 return StatusCode(404);
             }

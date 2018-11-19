@@ -5,11 +5,12 @@ namespace TogglerAPI.Interfaces
 {
     public interface IUserRepository
     {
-        int CreateUser(int roleId, string username, string password);
-        bool UpdateUser(int id, int roleId, string password);
-        bool DeleteUser(int id);
+        int CreateUser(UserModel userModel);
+        bool DeleteUserById(int id);
+        bool DeleteUserByUsername(string username);
         UserModel GetUserById(int id);
         UserModel GetUserByUsername(string username);
         List<UserModel> GetUserList();
+        bool UpdateUser(UserModel userModel);
     }
 }

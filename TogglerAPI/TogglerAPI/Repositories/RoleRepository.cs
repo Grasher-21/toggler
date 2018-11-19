@@ -26,7 +26,11 @@ namespace TogglerAPI.Repositories
 
             try
             {
-                RoleModel role = new RoleModel() { Name = roleModel.Name, Description = roleModel.Description };
+                RoleModel role = new RoleModel()
+                {
+                    Name = roleModel.Name,
+                    Description = roleModel.Description
+                };
 
                 TogglerContext.Roles.Add(role);
                 TogglerContext.SaveChanges();
@@ -63,12 +67,30 @@ namespace TogglerAPI.Repositories
 
         public RoleModel GetRole(int id)
         {
-            return TogglerContext.Roles.Find(id);
+            try
+            {
+                return TogglerContext.Roles.Find(id);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogFile($"Failed to get the Role: {ex.Message}");
+
+                return null;
+            }
         }
 
         public List<RoleModel> GetRoleList()
         {
-            return TogglerContext.Roles.ToList();
+            try
+            {
+                return TogglerContext.Roles.ToList();
+            }
+            catch (Exception ex)
+            {
+                Logger.LogFile($"Failed to get the Role list: {ex.Message}");
+
+                return null;
+            }
         }
 
         public bool UpdateRole(RoleModel roleModel)
