@@ -182,7 +182,7 @@ namespace TogglerAPI.Controllers
         [HttpPut]
         public ActionResult UpdateUser([FromBody] UserRequestModel user)
         {
-            if (user?.UserId == null || string.IsNullOrWhiteSpace(user.Username) || string.IsNullOrWhiteSpace(user.Password))
+            if (user?.UserId == null || string.IsNullOrWhiteSpace(user.Password))
             {
                 return StatusCode(400);
             }

@@ -176,7 +176,7 @@ namespace TogglerAPI.BusinessCore
 
         public bool UpdateUser(UserRequestModel userRequestModel)
         {
-            if (userRequestModel?.UserId == null || string.IsNullOrWhiteSpace(userRequestModel.Username) || string.IsNullOrWhiteSpace(userRequestModel.Password))
+            if (userRequestModel?.UserId == null || string.IsNullOrWhiteSpace(userRequestModel.Password))
             {
                 return false;
             }
@@ -187,7 +187,6 @@ namespace TogglerAPI.BusinessCore
                 {
                     UserId = (int)userRequestModel.UserId,
                     RoleId = userRequestModel.RoleId,
-                    Username = userRequestModel.Username,
                     Password = userRequestModel.Password
                 };
 

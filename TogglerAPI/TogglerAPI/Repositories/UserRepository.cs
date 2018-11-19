@@ -146,7 +146,7 @@ namespace TogglerAPI.Repositories
 
         public bool UpdateUser(UserModel userModel)
         {
-            if (userModel == null || string.IsNullOrWhiteSpace(userModel.Username) || string.IsNullOrWhiteSpace(userModel.Password))
+            if (userModel == null || string.IsNullOrWhiteSpace(userModel.Password))
             {
                 throw new ArgumentNullException();
             }
