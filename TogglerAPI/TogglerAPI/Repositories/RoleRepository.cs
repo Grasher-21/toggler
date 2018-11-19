@@ -59,7 +59,7 @@ namespace TogglerAPI.Repositories
             }
             catch (Exception ex)
             {
-                Logger.LogFile($"Failed to delete the Role: {ex.Message}");
+                Logger.LogFile($"Failed to delete the Role with id = {id}: {ex.Message}");
 
                 return false;
             }
@@ -73,7 +73,7 @@ namespace TogglerAPI.Repositories
             }
             catch (Exception ex)
             {
-                Logger.LogFile($"Failed to get the Role: {ex.Message}");
+                Logger.LogFile($"Failed to get the Role with id = {id}: {ex.Message}");
 
                 return null;
             }

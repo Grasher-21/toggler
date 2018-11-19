@@ -35,6 +35,7 @@ namespace TogglerAPI
             services.AddScoped<IHeaderValidation, HeaderValidation>();
             services.AddScoped<IRoleService, RoleService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IServiceService, ServiceService>();
 
             services.AddScoped<IRoleRepository, RoleRepository>();
             services.AddScoped<IServiceRepository, ServiceRepository>();

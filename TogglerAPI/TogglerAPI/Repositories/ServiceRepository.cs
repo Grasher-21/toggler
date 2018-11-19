@@ -17,19 +17,32 @@ namespace TogglerAPI.Repositories
             Logger = logger;
         }
 
-        public Guid CreateService(string name, string version)
+        public Guid CreateService(ServiceModel serviceModel)
         {
-            if (string.IsNullOrWhiteSpace(name) || string.IsNullOrWhiteSpace(version))
+            if (serviceModel == null || string.IsNullOrWhiteSpace(serviceModel.Name) || string.IsNullOrWhiteSpace(serviceModel.Version))
             {
                 throw new ArgumentNullException();
             }
 
-            ServiceModel service = new ServiceModel() { Name = name, Version = version };
+            try
+            {
+                ServiceModel service = new ServiceModel()
+                {
+                    Name = serviceModel.Name,
+                    Version = serviceModel.Version
+                };
 
-            TogglerContext.Services.Add(service);
-            TogglerContext.SaveChanges();
+                TogglerContext.Services.Add(service);
+                TogglerContext.SaveChanges();
 
-            return service.ServiceId;
+                return service.ServiceId;
+            }
+            catch (Exception ex)
+            {
+                Logger.LogFile($"Failed to create the Service: {ex.Message}");
+
+                return Guid.Empty;
+            }
         }
 
         public bool DeleteService(Guid id)
@@ -59,24 +72,53 @@ namespace TogglerAPI.Repositories
 
         public ServiceModel GetService(Guid id)
         {
-            return TogglerContext.Services.Find(id);
+            if (id == Guid.Empty)
+            {
+                throw new ArgumentNullException();
+            }
+
+            try
+            {
+                return TogglerContext.Services.Find(id);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogFile($"Failed to get the Service with id = {id}: {ex.Message}");
+
+                return null;
+            }
         }
 
         public List<ServiceModel> GetServiceList()
         {
-            return TogglerContext.Services.ToList();
+            try
+            {
+                return TogglerContext.Services.ToList();
+            }
+            catch (Exception ex)
+            {
+                Logger.LogFile($"Failed to get the Service list: {ex.Message}");
+
+                return null;
+            }
         }
 
-        public bool UpdateService(Guid id, string name, string version)
+        public bool UpdateService(ServiceModel serviceModel)
         {
-            ServiceModel service = TogglerContext.Services.Find(id);
+            if (serviceModel == null || serviceModel.ServiceId == Guid.Empty ||
+                string.IsNullOrWhiteSpace(serviceModel.Name) || string.IsNullOrWhiteSpace(serviceModel.Version))
+            {
+                throw new ArgumentNullException();
+            }
 
             try
             {
+                ServiceModel service = TogglerContext.Services.Find(serviceModel.ServiceId);
+
                 if (service != null)
                 {
-                    service.Name = name;
-                    service.Version = version;
+                    service.Name = serviceModel.Name;
+                    service.Version = serviceModel.Version;
 
                     TogglerContext.Services.Update(service);
                     TogglerContext.SaveChanges();

@@ -71,7 +71,7 @@ namespace TogglerAPI.Repositories
             }
             catch (Exception ex)
             {
-                Logger.LogFile($"Failed to delete the User: {ex.Message}");
+                Logger.LogFile($"Failed to delete the User with id = {id}: {ex.Message}");
 
                 return false;
             }
@@ -96,7 +96,7 @@ namespace TogglerAPI.Repositories
             }
             catch (Exception ex)
             {
-                Logger.LogFile($"Failed to delete the User: {ex.Message}");
+                Logger.LogFile($"Failed to delete the User with username = {username}: {ex.Message}");
 
                 return false;
             }
