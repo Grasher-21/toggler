@@ -1,0 +1,1134 @@
+{
+	"info": {
+		"_postman_id": "533413ce-db7b-e94d-332d-128c5c7b682c",
+		"name": "Toggler",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:5000/api/roles",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Username",
+						"value": "GrasherAdmin",
+						"type": "text"
+					},
+					{
+						"key": "Password",
+						"value": "Password",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"Name\": \"RoleTesteabc\",\n\t\"Description\": \"RoleTesteabc\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/roles",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"roles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/api/roles",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Username",
+						"value": "GrasherAdmin",
+						"type": "text"
+					},
+					{
+						"key": "Password",
+						"value": "Password",
+						"type": "text"
+					}
+				],
+				"body": {},
+				"url": {
+					"raw": "http://localhost:5000/api/roles/15",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"roles",
+						"15"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/api/roles/{id}",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Username",
+						"type": "text",
+						"value": "GrasherAdmin"
+					},
+					{
+						"key": "Password",
+						"type": "text",
+						"value": "Password"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/roles/16",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"roles",
+						"16"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/api/roles",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Username",
+						"type": "text",
+						"value": "GrasherAdmin"
+					},
+					{
+						"key": "Password",
+						"type": "text",
+						"value": "Password"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/roles",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"roles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/api/roles",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Username",
+						"value": "GrasherAdmin",
+						"type": "text"
+					},
+					{
+						"key": "Password",
+						"value": "Password",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"RoleId\": 17,\n\t\"Name\": \"TemporaryRole\",\n\t\"Description\": \"TemporaryRole\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/roles",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"roles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/api/users",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Username",
+						"value": "GrasherAdmin",
+						"type": "text"
+					},
+					{
+						"key": "Password",
+						"value": "Password",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"roleid\": 2,\n\t\"username\": \"Guest3\",\n\t\"password\": \"Password\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/api/users/{id}",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Username",
+						"type": "text",
+						"value": "GrasherAdmin"
+					},
+					{
+						"key": "Password",
+						"type": "text",
+						"value": "Password"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/users/7",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"users",
+						"7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/api/users/username/{username}",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Username",
+						"type": "text",
+						"value": "GrasherAdmin"
+					},
+					{
+						"key": "Password",
+						"type": "text",
+						"value": "Password"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/users/username/GrasherAdmiaaaaan",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"users",
+						"username",
+						"GrasherAdmiaaaaan"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/api/users",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Username",
+						"value": "GrasherAdmin",
+						"type": "text"
+					},
+					{
+						"key": "Password",
+						"value": "Password",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/api/users/{id}",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Username",
+						"type": "text",
+						"value": "GrasherAdmin"
+					},
+					{
+						"key": "Password",
+						"type": "text",
+						"value": "Password"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/users/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/api/users/username/{username}",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					},
+					{
+						"key": "Username",
+						"type": "text",
+						"value": "GrasherAdmin"
+					},
+					{
+						"key": "Password",
+						"type": "text",
+						"value": "Password"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/users/username/GrasherAdmin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"users",
+						"username",
+						"GrasherAdmin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/api/users",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Username",
+						"value": "GrasherAdmin",
+						"type": "text"
+					},
+					{
+						"key": "Password",
+						"value": "Password",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"userid\": 11,\n\t\"roleid\": 1,\n\t\"password\": \"Password12121\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/users",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/api/services",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Username",
+						"value": "GrasherAdmin",
+						"type": "text"
+					},
+					{
+						"key": "Password",
+						"value": "Password",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Grasher Service XPTO\",\n\t\"version\": \"1.1.1.0.1\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/services",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"services"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/api/services/{id}",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Username",
+						"value": "GrasherAdmin",
+						"type": "text"
+					},
+					{
+						"key": "Password",
+						"value": "Password",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/services/5d30263e-e259-4da8-4e49-08d64df69662",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"services",
+						"5d30263e-e259-4da8-4e49-08d64df69662"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/api/services/",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Username",
+						"value": "GrasherAdmin",
+						"type": "text"
+					},
+					{
+						"key": "Password",
+						"value": "Password",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/services/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"services",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/api/services/{id}",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Username",
+						"value": "GrasherAdmin",
+						"type": "text"
+					},
+					{
+						"key": "Password",
+						"value": "Password",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/services/B5EA917C-0D42-4F13-4E48-08D64DF69662",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"services",
+						"B5EA917C-0D42-4F13-4E48-08D64DF69662"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/api/services/",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Username",
+						"value": "GrasherAdmin",
+						"type": "text"
+					},
+					{
+						"key": "Password",
+						"value": "Password",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"serviceid\":\"B5EA917C-0D42-4F13-4E48-08D64DF69662\",\n\t\"name\":\"Grasher QWERTY\",\n\t\"version\": \"1.21.2\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/services/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"services",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/api/toggles",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Username",
+						"value": "GrasherAdmin",
+						"type": "text"
+					},
+					{
+						"key": "Password",
+						"value": "Password",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/toggles",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"toggles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/api/toggles/{id}",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Username",
+						"value": "GrasherAdmin",
+						"type": "text"
+					},
+					{
+						"key": "Password",
+						"value": "Password",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/toggles/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"toggles",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/api/toggles/",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Username",
+						"value": "GrasherAdmin",
+						"type": "text"
+					},
+					{
+						"key": "Password",
+						"value": "Password",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\":\"NewToggleTest\",\n\t\"value\": false\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/toggles/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"toggles",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/api/toggles/",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Username",
+						"value": "GrasherAdmin",
+						"type": "text"
+					},
+					{
+						"key": "Password",
+						"value": "Password",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"toggleid\": 5,\n\t\"name\":\"NewToggleTest\",\n\t\"value\": true\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/toggles/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"toggles",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/api/toggles/{id}",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Username",
+						"value": "GrasherAdmin",
+						"type": "text"
+					},
+					{
+						"key": "Password",
+						"value": "Password",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/toggles/5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"toggles",
+						"5"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/api/toggleservicepermissions/",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Username",
+						"value": "GrasherAdmin",
+						"type": "text"
+					},
+					{
+						"key": "Password",
+						"value": "Password",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/toggleservicepermissions/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"toggleservicepermissions",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/api/toggleservicepermissions/",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Username",
+						"value": "GrasherAdmin",
+						"type": "text"
+					},
+					{
+						"key": "Password",
+						"value": "Password",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"toggleid\":1,\n\t\"serviceid\":\"BC088724-5EEB-E811-BC4F-704D7B3F4D32\",\n\t\"state\":0,\n\t\"overridenvalue\":0\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/toggleservicepermissions/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"toggleservicepermissions",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/api/toggleservicepermissions/",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Username",
+						"value": "GrasherAdmin",
+						"type": "text"
+					},
+					{
+						"key": "Password",
+						"value": "Password",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"toggleid\":1,\n\t\"serviceid\":\"BC088724-5EEB-E811-BC4F-704D7B3F4D32\",\n\t\"state\":0,\n\t\"overridenvalue\":0\n}"
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/toggleservicepermissions/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"toggleservicepermissions",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/api/toggleservicepermissions/toggleid/{id}/serviceid/{id}",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Username",
+						"value": "GrasherAdmin",
+						"type": "text"
+					},
+					{
+						"key": "Password",
+						"value": "Password",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/toggleservicepermissions/toggleid/1/serviceid/BE088724-5EEB-E811-BC4F-704D7B3F4D32",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"toggleservicepermissions",
+						"toggleid",
+						"1",
+						"serviceid",
+						"BE088724-5EEB-E811-BC4F-704D7B3F4D32"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/api/toggleservicepermissions/toggleid/{id}/serviceid/{id}",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Username",
+						"value": "GrasherAdmin",
+						"type": "text"
+					},
+					{
+						"key": "Password",
+						"value": "Password",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/toggleservicepermissions/toggleid/1/serviceid/BC088724-5EEB-E811-BC4F-704D7B3F4D32",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"toggleservicepermissions",
+						"toggleid",
+						"1",
+						"serviceid",
+						"BC088724-5EEB-E811-BC4F-704D7B3F4D32"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:5000/api/toggleservicepermissions/{id}",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/toggleservicepermissions/CB31FC73-5CEB-E811-97B4-7824AF3635B8",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"toggleservicepermissions",
+						"CB31FC73-5CEB-E811-97B4-7824AF3635B8"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
