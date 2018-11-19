@@ -36,12 +36,13 @@ namespace TogglerAPI
             services.AddScoped<IRoleService, RoleService>();
             services.AddScoped<IServiceService, ServiceService>();
             services.AddScoped<IToggleService, ToggleService>();
+            services.AddScoped<IToggleServicePermissionService, ToggleServicePermissionService>();
             services.AddScoped<IUserService, UserService>();
             
             services.AddScoped<IRoleRepository, RoleRepository>();
             services.AddScoped<IServiceRepository, ServiceRepository>();
             services.AddScoped<IToggleRepository, ToggleRepository>();
-            services.AddScoped<IToggleServiceRepository, ToggleServiceRepository>();
+            services.AddScoped<IToggleServicePermissionRepository, ToggleServicePermissionRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
