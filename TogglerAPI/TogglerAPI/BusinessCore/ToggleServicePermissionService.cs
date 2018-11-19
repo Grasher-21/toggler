@@ -100,7 +100,7 @@ namespace TogglerAPI.BusinessCore
             List<ToggleServicePermissionModel> toggleServicePermissionModelList = ToggleServicePermissionRepository.
                     GetTogglePermissionListForServiceId(serviceId);
 
-            if (toggleServicePermissionModelList != null)
+            if (toggleServicePermissionModelList?.Count > 0)
             {
                 List<ToggleResponseModel> toggleResponseModelList = new List<ToggleResponseModel>();
 

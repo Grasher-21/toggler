@@ -95,7 +95,7 @@ namespace TogglerAPI.Repositories
         {
             if (roleModel == null || string.IsNullOrWhiteSpace(roleModel.Name) || string.IsNullOrWhiteSpace(roleModel.Description))
             {
-                throw new ArgumentNullException();
+                return false;
             }
 
             try
