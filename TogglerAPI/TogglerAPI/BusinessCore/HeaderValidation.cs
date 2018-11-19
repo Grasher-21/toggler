@@ -7,6 +7,7 @@ namespace TogglerAPI.BusinessCore
     {
         private readonly IUserRepository UserRepository;
         private readonly IRoleRepository RoleRepository;
+        private readonly int Invalid = -1;
 
         public HeaderValidation(IUserRepository userRepository, IRoleRepository roleRepository)
         {
@@ -18,14 +19,14 @@ namespace TogglerAPI.BusinessCore
         {
             if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
             {
-                return -1;
+                return Invalid;
             }
 
             UserModel user = UserRepository.GetUserByUsername(username);
             
             if (user == null || !user.Password.Equals(password))
             {
-                return -1;
+                return Invalid;
             }
 
             return user.RoleId;

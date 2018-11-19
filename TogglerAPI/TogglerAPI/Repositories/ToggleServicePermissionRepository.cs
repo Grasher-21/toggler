@@ -25,7 +25,7 @@ namespace TogglerAPI.Repositories
         {
             if (toggleServicePermissionModel == null)
             {
-                throw new ArgumentNullException();
+                return false;
             }
 
             try
@@ -53,7 +53,7 @@ namespace TogglerAPI.Repositories
         {
             if (serviceId == Guid.Empty)
             {
-                throw new ArgumentNullException();
+                return false;
             }
 
             try
@@ -82,7 +82,7 @@ namespace TogglerAPI.Repositories
         {
             if (serviceId == Guid.Empty)
             {
-                throw new ArgumentNullException();
+                return null;
             }
 
             try
@@ -111,11 +111,30 @@ namespace TogglerAPI.Repositories
             }
         }
 
+        public List<ToggleServicePermissionModel> GetTogglePermissionListForServiceId(Guid serviceId)
+        {
+            if (serviceId == Guid.Empty)
+            {
+                return null;
+            }
+
+            try
+            {
+                return TogglerContext.ToggleServicePermissions.Where(p => p.ServiceId == serviceId).ToList();
+            }
+            catch (Exception ex)
+            {
+                Logger.LogFile($"Failed to get the TogglePermissionListForServiceId: {ex.Message}");
+
+                return null;
+            }
+        }
+
         public bool UpdatePermission(ToggleServicePermissionModel toggleServicePermissionModel)
         {
             if (toggleServicePermissionModel == null || toggleServicePermissionModel.ServiceId == Guid.Empty)
             {
-                throw new ArgumentNullException();
+                return false;
             }
 
             try

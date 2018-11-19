@@ -69,15 +69,13 @@ namespace TogglerAPI.BusinessCore
                 return null;
             }
 
-            ServiceResponseModel serviceResponseModel;
-
             try
             {
                 ServiceModel serviceModel = ServiceRepository.GetService(id);
 
                 if (serviceModel != null)
                 {
-                    serviceResponseModel = new ServiceResponseModel()
+                    ServiceResponseModel serviceResponseModel = new ServiceResponseModel()
                     {
                         ServiceId = serviceModel.ServiceId,
                         Name = serviceModel.Name,
@@ -97,15 +95,13 @@ namespace TogglerAPI.BusinessCore
 
         public List<ServiceResponseModel> GetServiceList()
         {
-            List<ServiceResponseModel> serviceList;
-
             try
             {
                 List<ServiceModel> serviceModelList = ServiceRepository.GetServiceList();
 
                 if (serviceModelList != null)
                 {
-                    serviceList = new List<ServiceResponseModel>();
+                    List<ServiceResponseModel> serviceList = new List<ServiceResponseModel>();
 
                     foreach (ServiceModel item in serviceModelList)
                     {

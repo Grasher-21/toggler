@@ -11,6 +11,7 @@ namespace TogglerAPI.BusinessCore
     {
         private readonly IUserRepository UserRepository;
         private readonly ILogger Logger;
+        private readonly int Invalid = -1;
 
         public UserService(IUserRepository userRepository, ILogger logger)
         {
@@ -22,7 +23,7 @@ namespace TogglerAPI.BusinessCore
         {
             if (userRequestModel == null || string.IsNullOrWhiteSpace(userRequestModel.Username) || string.IsNullOrWhiteSpace(userRequestModel.Password))
             {
-                return -1;
+                return Invalid;
             }
 
             try
@@ -40,7 +41,7 @@ namespace TogglerAPI.BusinessCore
             {
                 Logger.LogFile($"Error creating a User: {ex.Message}");
 
-                return -1;
+                return Invalid;
             }
         }
 
@@ -79,15 +80,13 @@ namespace TogglerAPI.BusinessCore
 
         public UserResponseModel GetUserById(int id)
         {
-            UserResponseModel userResponseModel;
-
             try
             {
                 UserModel userModel = UserRepository.GetUserById(id);
 
                 if (userModel != null)
                 {
-                    userResponseModel = new UserResponseModel()
+                    UserResponseModel userResponseModel = new UserResponseModel()
                     {
                         UserId = userModel.UserId,
                         RoleId = userModel.RoleId,
@@ -113,15 +112,13 @@ namespace TogglerAPI.BusinessCore
                 return null;
             }
 
-            UserResponseModel userResponseModel;
-
             try
             {
                 UserModel userModel = UserRepository.GetUserByUsername(username);
 
                 if (userModel != null)
                 {
-                    userResponseModel = new UserResponseModel()
+                    UserResponseModel userResponseModel = new UserResponseModel()
                     {
                         UserId = userModel.UserId,
                         RoleId = userModel.RoleId,
@@ -142,15 +139,13 @@ namespace TogglerAPI.BusinessCore
 
         public List<UserResponseModel> GetUserList()
         {
-            List<UserResponseModel> userList;
-
             try
             {
                 List<UserModel> userModelList = UserRepository.GetUserList();
 
                 if (userModelList != null)
                 {
-                    userList = new List<UserResponseModel>();
+                    List<UserResponseModel> userList = new List<UserResponseModel>();
 
                     foreach (UserModel item in userModelList)
                     {

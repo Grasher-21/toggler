@@ -10,6 +10,7 @@ namespace TogglerAPI.Repositories
     {
         private readonly TogglerContext TogglerContext;
         private readonly ILogger Logger;
+        private readonly int Invalid = -1;
 
         public RoleRepository(TogglerContext togglerContext, ILogger logger)
         {
@@ -21,7 +22,7 @@ namespace TogglerAPI.Repositories
         {
             if (roleModel == null || string.IsNullOrWhiteSpace(roleModel.Name) || string.IsNullOrWhiteSpace(roleModel.Description))
             {
-                throw new ArgumentNullException();
+                return Invalid;
             }
 
             try
@@ -35,7 +36,7 @@ namespace TogglerAPI.Repositories
             {
                 Logger.LogFile($"Failed to create the Role: {ex.Message}");
 
-                return -1;
+                return Invalid;
             }
         }
 

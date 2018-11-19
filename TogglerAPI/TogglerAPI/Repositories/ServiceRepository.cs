@@ -21,7 +21,7 @@ namespace TogglerAPI.Repositories
         {
             if (serviceModel == null || string.IsNullOrWhiteSpace(serviceModel.Name) || string.IsNullOrWhiteSpace(serviceModel.Version))
             {
-                throw new ArgumentNullException();
+                return Guid.Empty;
             }
 
             try
@@ -43,7 +43,7 @@ namespace TogglerAPI.Repositories
         {
             if (id == Guid.Empty)
             {
-                throw new ArgumentNullException();
+                return false;
             }
 
             try
@@ -71,7 +71,7 @@ namespace TogglerAPI.Repositories
         {
             if (id == Guid.Empty)
             {
-                throw new ArgumentNullException();
+                return null;
             }
 
             try
@@ -105,7 +105,7 @@ namespace TogglerAPI.Repositories
             if (serviceModel == null || serviceModel.ServiceId == Guid.Empty ||
                 string.IsNullOrWhiteSpace(serviceModel.Name) || string.IsNullOrWhiteSpace(serviceModel.Version))
             {
-                throw new ArgumentNullException();
+                return false;
             }
 
             try

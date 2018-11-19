@@ -11,6 +11,7 @@ namespace TogglerAPI.BusinessCore
     {
         private readonly IToggleRepository ToggleRepository;
         private readonly ILogger Logger;
+        private readonly int Invalid = -1;
 
         public ToggleService(IToggleRepository toggleRepository, ILogger logger)
         {
@@ -22,7 +23,7 @@ namespace TogglerAPI.BusinessCore
         {
             if (toggleRequestModel == null || string.IsNullOrWhiteSpace(toggleRequestModel.Name))
             {
-                return -1;
+                return Invalid;
             }
 
             try
@@ -39,7 +40,7 @@ namespace TogglerAPI.BusinessCore
             {
                 Logger.LogFile($"Error creating a Toggle: {ex.Message}");
 
-                return -1;
+                return Invalid;
             }
         }
 
@@ -59,15 +60,13 @@ namespace TogglerAPI.BusinessCore
 
         public ToggleResponseModel GetToggle(int id)
         {
-            ToggleResponseModel toggleResponseModel;
-
             try
             {
                 ToggleModel toggleModel = ToggleRepository.GetToggle(id);
 
                 if (toggleModel != null)
                 {
-                    toggleResponseModel = new ToggleResponseModel()
+                    ToggleResponseModel toggleResponseModel = new ToggleResponseModel()
                     {
                         ToggleId = toggleModel.ToggleId,
                         Name = toggleModel.Name,
@@ -87,15 +86,13 @@ namespace TogglerAPI.BusinessCore
 
         public List<ToggleResponseModel> GetToggleList()
         {
-            List<ToggleResponseModel> toggleList;
-
             try
             {
                 List<ToggleModel> toggleModelList = ToggleRepository.GetToggleList();
 
                 if (toggleModelList != null)
                 {
-                    toggleList = new List<ToggleResponseModel>();
+                    List<ToggleResponseModel> toggleList = new List<ToggleResponseModel>();
 
                     foreach (ToggleModel item in toggleModelList)
                     {

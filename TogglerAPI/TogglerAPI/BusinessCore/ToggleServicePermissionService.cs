@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using TogglerAPI.Enums;
 using TogglerAPI.Interfaces;
 using TogglerAPI.Models;
 using TogglerAPI.RequestModels;
@@ -32,22 +33,27 @@ namespace TogglerAPI.BusinessCore
 
             try
             {
-                ToggleServicePermissionModel toggleServicePermissionModel = new ToggleServicePermissionModel()
+                if (toggleServiceRequestModel.State == State.ALLOWED ||
+                    toggleServiceRequestModel.State == State.BLOCKED ||
+                    toggleServiceRequestModel.State == State.OVERRIDE)
                 {
-                    ToggleId = toggleServiceRequestModel.ToggleId,
-                    ServiceId = toggleServiceRequestModel.ServiceId,
-                    State = toggleServiceRequestModel.State,
-                    OverridenValue = toggleServiceRequestModel.OverridenValue
-                };
+                    ToggleServicePermissionModel toggleServicePermissionModel = new ToggleServicePermissionModel()
+                    {
+                        ToggleId = toggleServiceRequestModel.ToggleId,
+                        ServiceId = toggleServiceRequestModel.ServiceId,
+                        State = toggleServiceRequestModel.State,
+                        OverridenValue = toggleServiceRequestModel.OverridenValue
+                    };
 
-                return ToggleServicePermissionRepository.CreatePermission(toggleServicePermissionModel);
+                    return ToggleServicePermissionRepository.CreatePermission(toggleServicePermissionModel);
+                }
             }
             catch (Exception ex)
             {
                 Logger.LogFile($"Error creating a ToggleServicePermission: {ex.Message}");
-
-                return false;
             }
+
+            return false;
         }
 
         public bool DeletePermission(int toggleId, Guid serviceId)
@@ -67,6 +73,56 @@ namespace TogglerAPI.BusinessCore
 
                 return false;
             }
+        }
+
+        public List<ToggleResponseModel> GetTogglePermissionListForServiceId(Guid serviceId)
+        {
+            if (serviceId == Guid.Empty)
+            {
+                return null;
+            }
+
+            try
+            {
+                // List with all Toggles' permissions for a Service (includes Allowed, Blocked and Override Toggles)
+                List<ToggleServicePermissionModel> toggleServicePermissionModelList = ToggleServicePermissionRepository.
+                    GetTogglePermissionListForServiceId(serviceId);
+
+                if (toggleServicePermissionModelList != null)
+                {
+                    List<ToggleResponseModel> toggleResponseModelList = new List<ToggleResponseModel>();
+
+                    List<int> idList = new List<int>();
+
+                    foreach (var item in toggleServicePermissionModelList)
+                    {
+                        if (item.State == State.ALLOWED)
+                        {
+                            idList.Add(item.ToggleId);
+                        }
+                        else if (item.State == State.OVERRIDE)
+                        {
+                        }
+                    }
+
+                    // List that contains all "Allowed" Toggles for a specific Service
+                    List<ToggleModel> toggleModelList = ToggleRepository.GetToggleListByIds(idList);
+
+                    if (toggleModelList != null)
+                    {
+                        foreach (var item in toggleModelList)
+                        {
+
+                        }
+                    }
+                }
+            }
+            catch(Exception ex)
+            {
+                Logger.LogFile($"Error getting TogglePermissionListForServiceId: {ex.Message}");
+            }
+
+            return null;
         }
 
         public ToggleServicePermissionResponseModel GetToggleServicePermission(int toggleId, Guid serviceId)
@@ -147,15 +203,20 @@ namespace TogglerAPI.BusinessCore
 
             try
             {
-                ToggleServicePermissionModel toggleServicePermissionModel = new ToggleServicePermissionModel()
+                if (toggleServiceRequestModel.State == State.ALLOWED ||
+                    toggleServiceRequestModel.State == State.BLOCKED ||
+                    toggleServiceRequestModel.State == State.OVERRIDE)
                 {
-                    ToggleId = toggleServiceRequestModel.ToggleId,
-                    ServiceId = toggleServiceRequestModel.ServiceId,
-                    State = toggleServiceRequestModel.State,
-                    OverridenValue = toggleServiceRequestModel.OverridenValue
-                };
+                    ToggleServicePermissionModel toggleServicePermissionModel = new ToggleServicePermissionModel()
+                    {
+                        ToggleId = toggleServiceRequestModel.ToggleId,
+                        ServiceId = toggleServiceRequestModel.ServiceId,
+                        State = toggleServiceRequestModel.State,
+                        OverridenValue = toggleServiceRequestModel.OverridenValue
+                    };
 
-                return ToggleServicePermissionRepository.UpdatePermission(toggleServicePermissionModel);
+                    return ToggleServicePermissionRepository.UpdatePermission(toggleServicePermissionModel);
+                }
             }
             catch (Exception ex)
             {

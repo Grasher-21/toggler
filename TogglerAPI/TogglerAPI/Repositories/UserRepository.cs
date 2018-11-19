@@ -11,6 +11,7 @@ namespace TogglerAPI.Repositories
         private readonly TogglerContext TogglerContext;
         private readonly ILogger Logger;
         private readonly IRoleRepository RoleRepository;
+        private readonly int Invalid = -1;
 
         public UserRepository(TogglerContext togglerContext, ILogger logger, IRoleRepository roleRepository)
         {
@@ -23,7 +24,7 @@ namespace TogglerAPI.Repositories
         {
             if (userModel == null || string.IsNullOrWhiteSpace(userModel.Username) || string.IsNullOrWhiteSpace(userModel.Password))
             {
-                throw new ArgumentNullException();
+                return Invalid;
             }
 
             try
@@ -34,7 +35,7 @@ namespace TogglerAPI.Repositories
                 {
                     Logger.LogFile($"Failed to find the Role {userModel.RoleId}");
 
-                    return -1;
+                    return Invalid;
                 }
 
                 TogglerContext.Users.Add(userModel);
@@ -46,7 +47,7 @@ namespace TogglerAPI.Repositories
             {
                 Logger.LogFile($"Failed to create the User: {ex.Message}");
 
-                return -1;
+                return Invalid;
             }
         }
 
@@ -77,7 +78,7 @@ namespace TogglerAPI.Repositories
         {
             if (string.IsNullOrWhiteSpace(username))
             {
-                throw new ArgumentNullException();
+                return false;
             }
 
             try
@@ -147,7 +148,7 @@ namespace TogglerAPI.Repositories
         {
             if (userModel == null || string.IsNullOrWhiteSpace(userModel.Password))
             {
-                throw new ArgumentNullException();
+                return false;
             }
 
             try

@@ -11,6 +11,7 @@ namespace TogglerAPI.BusinessCore
     {
         private readonly IRoleRepository RoleRepository;
         private readonly ILogger Logger;
+        private readonly int Invalid = -1;
 
         public RoleService(IRoleRepository roleRepository, ILogger logger)
         {
@@ -22,7 +23,7 @@ namespace TogglerAPI.BusinessCore
         {
             if (roleRequestModel == null || string.IsNullOrWhiteSpace(roleRequestModel.Name) || string.IsNullOrWhiteSpace(roleRequestModel.Description))
             {
-                return -1;
+                return Invalid;
             }
 
             try
@@ -39,7 +40,7 @@ namespace TogglerAPI.BusinessCore
             {
                 Logger.LogFile($"Error creating a Role: {ex.Message}");
 
-                return -1;
+                return Invalid;
             }
         }
 
@@ -87,15 +88,13 @@ namespace TogglerAPI.BusinessCore
 
         public List<RoleResponseModel> GetRoleList()
         {
-            List<RoleResponseModel> roleList;
-
             try
             {
                 List<RoleModel> roleModelList = RoleRepository.GetRoleList();
 
                 if (roleModelList != null)
                 {
-                    roleList = new List<RoleResponseModel>();
+                    List<RoleResponseModel> roleList = new List<RoleResponseModel>();
 
                     foreach (RoleModel item in roleModelList)
                     {

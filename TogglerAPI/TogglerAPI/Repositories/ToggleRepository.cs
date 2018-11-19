@@ -10,6 +10,7 @@ namespace TogglerAPI.Repositories
     {
         private readonly TogglerContext TogglerContext;
         private readonly ILogger Logger;
+        private readonly int Invalid = -1;
 
         public ToggleRepository(TogglerContext togglerContext, ILogger logger)
         {
@@ -21,7 +22,7 @@ namespace TogglerAPI.Repositories
         {
             if (toggleModel == null || string.IsNullOrWhiteSpace(toggleModel.Name))
             {
-                throw new ArgumentNullException();
+                return Invalid;
             }
 
             try
@@ -35,7 +36,7 @@ namespace TogglerAPI.Repositories
             {
                 Logger.LogFile($"Failed to create the Toggle: {ex.Message}");
 
-                return -1;
+                return Invalid;
             }
         }
 
@@ -90,11 +91,30 @@ namespace TogglerAPI.Repositories
             }
         }
 
+        public List<ToggleModel> GetToggleListByIds(List<int> idList)
+        {
+            if (idList == null)
+            {
+                return null;
+            }
+
+            try
+            {
+                return TogglerContext.Toggles.Where(x => idList.Contains(x.ToggleId)).ToList();
+            }
+            catch (Exception ex)
+            {
+                Logger.LogFile($"Failed to get the Toggle list by ids: {ex.Message}");
+
+                return null;
+            }
+        }
+
         public bool UpdateToggle(ToggleModel toggleModel)
         {
             if (toggleModel == null || string.IsNullOrWhiteSpace(toggleModel.Name))
             {
-                throw new ArgumentNullException();
+                return false;
             }
 
             try

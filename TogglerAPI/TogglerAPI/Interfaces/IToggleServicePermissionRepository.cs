@@ -10,6 +10,7 @@ namespace TogglerAPI.Interfaces
         bool DeletePermission(int toggleId, Guid serviceId);
         ToggleServicePermissionModel GetToggleServicePermission(int toggleId, Guid serviceId);
         List<ToggleServicePermissionModel> GetToggleServicePermissionList();
+        List<ToggleServicePermissionModel> GetTogglePermissionListForServiceId(Guid serviceId);
         bool UpdatePermission(ToggleServicePermissionModel toggleServiceModel);
     }
 }
