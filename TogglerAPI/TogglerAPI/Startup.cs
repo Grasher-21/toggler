@@ -32,7 +32,7 @@ namespace TogglerAPI
 
             services.AddScoped<ILogger>(x => new Logger(Configuration.GetSection("LoggerFile").Value));
 
-            services.AddScoped<IHeaderValidation, HeaderValidation>();
+            services.AddScoped<IValidatorService, ValidatorService>();
             services.AddScoped<IRoleService, RoleService>();
             services.AddScoped<IServiceService, ServiceService>();
             services.AddScoped<IToggleService, ToggleService>();

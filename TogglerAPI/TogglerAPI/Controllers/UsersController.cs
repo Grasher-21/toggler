@@ -10,12 +10,12 @@ namespace TogglerAPI.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly IHeaderValidation HeaderValidation;
+        private readonly IValidatorService HeaderValidation;
         private readonly IUserService UserService;
         private readonly string Username = "Username";
         private readonly string Password = "Password";
 
-        public UsersController(IHeaderValidation headerValidation, IUserService userService)
+        public UsersController(IValidatorService headerValidation, IUserService userService)
         {
             HeaderValidation = headerValidation;
             UserService = userService;

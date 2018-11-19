@@ -10,12 +10,12 @@ namespace TogglerAPI.Controllers
     [ApiController]
     public class TogglesController : ControllerBase
     {
-        private readonly IHeaderValidation HeaderValidation;
+        private readonly IValidatorService HeaderValidation;
         private readonly IToggleService ToggleService;
         private readonly string Username = "Username";
         private readonly string Password = "Password";
 
-        public TogglesController(IHeaderValidation headerValidation, IToggleService toggleService)
+        public TogglesController(IValidatorService headerValidation, IToggleService toggleService)
         {
             HeaderValidation = headerValidation;
             ToggleService = toggleService;

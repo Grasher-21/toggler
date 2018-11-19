@@ -11,14 +11,14 @@ namespace TogglerAPI.Controllers
     [ApiController]
     public class ToggleServicePermissionsController : ControllerBase
     {
-        private readonly IHeaderValidation HeaderValidation;
+        private readonly IValidatorService ValidatorService;
         private readonly IToggleServicePermissionService ToggleServicePermissionService;
         private readonly string Username = "Username";
         private readonly string Password = "Password";
 
-        public ToggleServicePermissionsController(IHeaderValidation headerValidation, IToggleServicePermissionService toggleServicePermissionService)
+        public ToggleServicePermissionsController(IValidatorService headerValidation, IToggleServicePermissionService toggleServicePermissionService)
         {
-            HeaderValidation = headerValidation;
+            ValidatorService = headerValidation;
             ToggleServicePermissionService = toggleServicePermissionService;
         }
 
@@ -30,14 +30,14 @@ namespace TogglerAPI.Controllers
                 return StatusCode(400);
             }
 
-            int result = HeaderValidation.ValidateUserCredentials(Request.Headers[Username], Request.Headers[Password]);
+            int result = ValidatorService.ValidateUserCredentials(Request.Headers[Username], Request.Headers[Password]);
 
             if (result == -1)
             {
                 return StatusCode(401);
             }
 
-            if (!HeaderValidation.ValidateUserPermissions(result))
+            if (!ValidatorService.ValidateUserPermissions(result))
             {
                 return StatusCode(403);
             }
@@ -53,14 +53,14 @@ namespace TogglerAPI.Controllers
         [HttpDelete("toggleid/{id}/serviceid/{serviceId}")]
         public ActionResult DeleteToggleServicePermission(int id, Guid serviceId)
         {
-            int result = HeaderValidation.ValidateUserCredentials(Request.Headers[Username], Request.Headers[Password]);
+            int result = ValidatorService.ValidateUserCredentials(Request.Headers[Username], Request.Headers[Password]);
 
             if (result == -1)
             {
                 return StatusCode(401);
             }
 
-            if (!HeaderValidation.ValidateUserPermissions(result))
+            if (!ValidatorService.ValidateUserPermissions(result))
             {
                 return StatusCode(403);
             }
@@ -73,17 +73,35 @@ namespace TogglerAPI.Controllers
             return StatusCode(204);
         }
 
+        [HttpGet("{serviceId}")]
+        public ActionResult<List<ToggleResponseModel>> GetTogglesForServiceId(Guid serviceId)
+        {
+            if (!ValidatorService.ValidateServicePermissions(serviceId))
+            {
+                return StatusCode(403);
+            }
+
+            List<ToggleResponseModel> toggleResponseModelList = ToggleServicePermissionService.GetTogglesListForServiceId(serviceId);
+
+            if (toggleResponseModelList == null)
+            {
+                return StatusCode(404);
+            }
+
+            return StatusCode(200, toggleResponseModelList);
+        }
+
         [HttpGet("toggleid/{id}/serviceid/{serviceId}")]
         public ActionResult<ToggleServicePermissionResponseModel> GetToggleServicePermission(int id, Guid serviceId)
         {
-            int result = HeaderValidation.ValidateUserCredentials(Request.Headers[Username], Request.Headers[Password]);
+            int result = ValidatorService.ValidateUserCredentials(Request.Headers[Username], Request.Headers[Password]);
 
             if (result == -1)
             {
                 return StatusCode(401);
             }
 
-            if (!HeaderValidation.ValidateUserPermissions(result))
+            if (!ValidatorService.ValidateUserPermissions(result))
             {
                 return StatusCode(403);
             }
@@ -101,14 +119,14 @@ namespace TogglerAPI.Controllers
         [HttpGet]
         public ActionResult<List<ToggleServicePermissionResponseModel>> GetToggleServicePermissionList()
         {
-            int result = HeaderValidation.ValidateUserCredentials(Request.Headers[Username], Request.Headers[Password]);
+            int result = ValidatorService.ValidateUserCredentials(Request.Headers[Username], Request.Headers[Password]);
 
             if (result == -1)
             {
                 return StatusCode(401);
             }
 
-            if (!HeaderValidation.ValidateUserPermissions(result))
+            if (!ValidatorService.ValidateUserPermissions(result))
             {
                 return StatusCode(403);
             }
@@ -131,14 +149,14 @@ namespace TogglerAPI.Controllers
                 return StatusCode(400);
             }
 
-            int result = HeaderValidation.ValidateUserCredentials(Request.Headers[Username], Request.Headers[Password]);
+            int result = ValidatorService.ValidateUserCredentials(Request.Headers[Username], Request.Headers[Password]);
 
             if (result == -1)
             {
                 return StatusCode(401);
             }
 
-            if (!HeaderValidation.ValidateUserPermissions(result))
+            if (!ValidatorService.ValidateUserPermissions(result))
             {
                 return StatusCode(403);
             }

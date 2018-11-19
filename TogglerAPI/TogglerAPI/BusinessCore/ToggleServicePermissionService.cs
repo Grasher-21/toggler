@@ -75,7 +75,7 @@ namespace TogglerAPI.BusinessCore
             }
         }
 
-        public List<ToggleResponseModel> GetTogglePermissionListForServiceId(Guid serviceId)
+        public List<ToggleResponseModel> GetTogglesListForServiceId(Guid serviceId)
         {
             if (serviceId == Guid.Empty)
             {
@@ -84,42 +84,76 @@ namespace TogglerAPI.BusinessCore
 
             try
             {
-                // List with all Toggles' permissions for a Service (includes Allowed, Blocked and Override Toggles)
-                List<ToggleServicePermissionModel> toggleServicePermissionModelList = ToggleServicePermissionRepository.
+                return GetTogglesDetailsForServiceId(serviceId);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogFile($"Error getting TogglePermissionListForServiceId: {ex.Message}");
+
+                return null;
+            }
+        }
+
+        private List<ToggleResponseModel> GetTogglesDetailsForServiceId(Guid serviceId)
+        {
+            // List with all Toggles' permissions for a Service (includes Allowed, Blocked and Override Toggles)
+            List<ToggleServicePermissionModel> toggleServicePermissionModelList = ToggleServicePermissionRepository.
                     GetTogglePermissionListForServiceId(serviceId);
 
-                if (toggleServicePermissionModelList != null)
+            if (toggleServicePermissionModelList != null)
+            {
+                List<ToggleResponseModel> toggleResponseModelList = new List<ToggleResponseModel>();
+
+                List<int> allowedIdList = new List<int>();
+                List<int> overriddenIdList = new List<int>();
+
+                foreach (var item in toggleServicePermissionModelList)
                 {
-                    List<ToggleResponseModel> toggleResponseModelList = new List<ToggleResponseModel>();
-
-                    List<int> idList = new List<int>();
-
-                    foreach (var item in toggleServicePermissionModelList)
+                    if (item.State == State.ALLOWED)
                     {
-                        if (item.State == State.ALLOWED)
-                        {
-                            idList.Add(item.ToggleId);
-                        }
-                        else if (item.State == State.OVERRIDE)
-                        {
-                        }
+                        allowedIdList.Add(item.ToggleId);
                     }
-
-                    // List that contains all "Allowed" Toggles for a specific Service
-                    List<ToggleModel> toggleModelList = ToggleRepository.GetToggleListByIds(idList);
-
-                    if (toggleModelList != null)
+                    else if (item.State == State.OVERRIDE)
                     {
-                        foreach (var item in toggleModelList)
-                        {
+                        overriddenIdList.Add(item.ToggleId);
 
+                        toggleResponseModelList.Add(new ToggleResponseModel()
+                        {
+                            ToggleId = item.ToggleId,
+                            Value = item.OverridenValue
+                        });
+                    }
+                }
+
+                List<ToggleModel> overridenList = ToggleRepository.GetToggleListByIds(overriddenIdList);
+                List<ToggleModel> allowedList = ToggleRepository.GetToggleListByIds(allowedIdList);
+
+                if (overridenList != null)
+                {
+                    for (int i = 0; i < toggleResponseModelList.Count; i++)
+                    {
+                        for (int j = 0; j < overridenList.Count; j++)
+                        {
+                            if (toggleResponseModelList[i].ToggleId == overridenList[j].ToggleId)
+                            {
+                                toggleResponseModelList[i].Name = overridenList[j].Name;
+                                break;
+                            }
                         }
                     }
                 }
-            }
-            catch(Exception ex)
-            {
-                Logger.LogFile($"Error getting TogglePermissionListForServiceId: {ex.Message}");
+
+                foreach (var item in allowedList)
+                {
+                    toggleResponseModelList.Add(new ToggleResponseModel()
+                    {
+                        ToggleId = item.ToggleId,
+                        Name = item.Name,
+                        Value = item.Value
+                    });
+                }
+
+                return toggleResponseModelList;
             }
 
             return null;
