@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
 using TogglerAPI.Interfaces;
 using TogglerAPI.RequestModels;
@@ -9,23 +8,23 @@ namespace TogglerAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ServicesController : ControllerBase
+    public class TogglesController : ControllerBase
     {
         private readonly IHeaderValidation HeaderValidation;
-        private readonly IServiceService ServiceService;
+        private readonly IToggleService ToggleService;
         private readonly string Username = "Username";
         private readonly string Password = "Password";
 
-        public ServicesController(IHeaderValidation headerValidation, IServiceService serviceService)
+        public TogglesController(IHeaderValidation headerValidation, IToggleService toggleService)
         {
             HeaderValidation = headerValidation;
-            ServiceService = serviceService;
+            ToggleService = toggleService;
         }
 
         [HttpPost]
-        public ActionResult<Guid> CreateService([FromBody] ServiceRequestModel serviceRequestModel)
+        public ActionResult<int> CreateToggle([FromBody] ToggleRequestModel toggleRequestModel)
         {
-            if (serviceRequestModel == null || string.IsNullOrWhiteSpace(serviceRequestModel.Name) || string.IsNullOrWhiteSpace(serviceRequestModel.Version))
+            if (toggleRequestModel == null || string.IsNullOrWhiteSpace(toggleRequestModel.Name))
             {
                 return StatusCode(400);
             }
@@ -42,24 +41,19 @@ namespace TogglerAPI.Controllers
                 return StatusCode(403);
             }
 
-            Guid guid = ServiceService.CreateService(serviceRequestModel);
+            result = ToggleService.CreateToggle(toggleRequestModel);
 
-            if (guid == Guid.Empty)
+            if (result == -1)
             {
                 return StatusCode(500);
             }
 
-            return StatusCode(201, guid);
+            return StatusCode(201, result);
         }
 
         [HttpDelete("{id}")]
-        public ActionResult DeleteService(Guid id)
+        public ActionResult DeleteToggle(int id)
         {
-            if (id == Guid.Empty)
-            {
-                return StatusCode(400);
-            }
-
             int result = HeaderValidation.ValidateUserCredentials(Request.Headers[Username], Request.Headers[Password]);
 
             if (result == -1)
@@ -72,7 +66,7 @@ namespace TogglerAPI.Controllers
                 return StatusCode(403);
             }
 
-            if (!ServiceService.DeleteService(id))
+            if (!ToggleService.DeleteToggle(id))
             {
                 return StatusCode(404);
             }
@@ -81,13 +75,8 @@ namespace TogglerAPI.Controllers
         }
 
         [HttpGet("{id}")]
-        public ActionResult<ServiceResponseModel> GetService(Guid id)
+        public ActionResult<ToggleResponseModel> GetToggle(int id)
         {
-            if (id == Guid.Empty)
-            {
-                return StatusCode(400);
-            }
-
             int result = HeaderValidation.ValidateUserCredentials(Request.Headers[Username], Request.Headers[Password]);
 
             if (result == -1)
@@ -100,18 +89,18 @@ namespace TogglerAPI.Controllers
                 return StatusCode(403);
             }
 
-            ServiceResponseModel serviceResponseModel = ServiceService.GetService(id);
+            ToggleResponseModel ToggleResponseModel = ToggleService.GetToggle(id);
 
-            if (serviceResponseModel == null)
+            if (ToggleResponseModel == null)
             {
                 return StatusCode(404);
             }
 
-            return StatusCode(200, serviceResponseModel);
+            return StatusCode(200, ToggleResponseModel);
         }
 
         [HttpGet]
-        public ActionResult<List<ServiceResponseModel>> GetServiceList()
+        public ActionResult<List<ToggleResponseModel>> GetToggleList()
         {
             int result = HeaderValidation.ValidateUserCredentials(Request.Headers[Username], Request.Headers[Password]);
 
@@ -125,21 +114,20 @@ namespace TogglerAPI.Controllers
                 return StatusCode(403);
             }
 
-            List<ServiceResponseModel> serviceList = ServiceService.GetServiceList();
+            List<ToggleResponseModel> ToggleList = ToggleService.GetToggleList();
 
-            if (serviceList == null)
+            if (ToggleList == null)
             {
                 return StatusCode(404);
             }
 
-            return StatusCode(200, serviceList);
+            return StatusCode(200, ToggleList);
         }
 
         [HttpPut]
-        public ActionResult UpdateService([FromBody] ServiceRequestModel service)
+        public ActionResult UpdateToggle([FromBody] ToggleRequestModel toggleRequestModel)
         {
-            if (service == null || service.ServiceId == null || service.ServiceId == Guid.Empty || 
-                string.IsNullOrWhiteSpace(service.Name) || string.IsNullOrWhiteSpace(service.Version))
+            if (toggleRequestModel?.ToggleId == null || string.IsNullOrWhiteSpace(toggleRequestModel.Name))
             {
                 return StatusCode(400);
             }
@@ -156,7 +144,7 @@ namespace TogglerAPI.Controllers
                 return StatusCode(403);
             }
 
-            if (!ServiceService.UpdateService(service))
+            if (!ToggleService.UpdateToggle(toggleRequestModel))
             {
                 return StatusCode(404);
             }

@@ -37,7 +37,7 @@ namespace TogglerAPI.BusinessCore
             }
             catch (Exception ex)
             {
-                Logger.LogFile($"Error creating a service: {ex.Message}");
+                Logger.LogFile($"Error creating a Service: {ex.Message}");
 
                 return Guid.Empty;
             }
@@ -56,7 +56,7 @@ namespace TogglerAPI.BusinessCore
             }
             catch (Exception ex)
             {
-                Logger.LogFile($"Error deleting a service: {ex.Message}");
+                Logger.LogFile($"Error deleting a Service: {ex.Message}");
 
                 return false;
             }
@@ -89,7 +89,7 @@ namespace TogglerAPI.BusinessCore
             }
             catch (Exception ex)
             {
-                Logger.LogFile($"Error getting a service by id = {id}: {ex.Message}");
+                Logger.LogFile($"Error getting a Service by id = {id}: {ex.Message}");
             }
 
             return null;
@@ -122,7 +122,7 @@ namespace TogglerAPI.BusinessCore
             }
             catch (Exception ex)
             {
-                Logger.LogFile($"Error getting a service list: {ex.Message}");
+                Logger.LogFile($"Error getting a Service list: {ex.Message}");
             }
 
             return null;
@@ -149,7 +149,7 @@ namespace TogglerAPI.BusinessCore
             }
             catch (Exception ex)
             {
-                Logger.LogFile($"Error updating a service: {ex.Message}");
+                Logger.LogFile($"Error updating a Service: {ex.Message}");
             }
 
             return false;

@@ -28,30 +28,23 @@ namespace TogglerAPI.Repositories
 
             try
             {
-                RoleModel role = RoleRepository.GetRole(userModel.RoleId);
+                RoleModel roleModel = RoleRepository.GetRole(userModel.RoleId);
 
-                if (role == null)
+                if (roleModel == null)
                 {
                     Logger.LogFile($"Failed to find the Role {userModel.RoleId}");
 
                     return -1;
                 }
 
-                UserModel user = new UserModel()
-                {
-                    RoleId = userModel.RoleId,
-                    Username = userModel.Username,
-                    Password = userModel.Password
-                };
-
-                TogglerContext.Users.Add(user);
+                TogglerContext.Users.Add(userModel);
                 TogglerContext.SaveChanges();
 
-                return user.UserId;
+                return userModel.UserId;
             }
             catch (Exception ex)
             {
-                Logger.LogFile($"Failed to delete the User: {ex.Message}");
+                Logger.LogFile($"Failed to create the User: {ex.Message}");
 
                 return -1;
             }
@@ -61,20 +54,23 @@ namespace TogglerAPI.Repositories
         {
             try
             {
-                UserModel user = new UserModel() { UserId = id };
+                UserModel user = TogglerContext.Users.Find(id);
 
-                TogglerContext.Users.Attach(user);
-                TogglerContext.Users.Remove(user);
-                TogglerContext.SaveChanges();
+                if (user != null)
+                {
+                    TogglerContext.Users.Attach(user);
+                    TogglerContext.Users.Remove(user);
+                    TogglerContext.SaveChanges();
 
-                return true;
+                    return true;
+                }
             }
             catch (Exception ex)
             {
                 Logger.LogFile($"Failed to delete the User with id = {id}: {ex.Message}");
-
-                return false;
             }
+
+            return false;
         }
 
         public bool DeleteUserByUsername(string username)
@@ -88,18 +84,21 @@ namespace TogglerAPI.Repositories
             {
                 UserModel user = TogglerContext.Users.Where(u => u.Username == username).FirstOrDefault();
 
-                TogglerContext.Users.Attach(user);
-                TogglerContext.Users.Remove(user);
-                TogglerContext.SaveChanges();
+                if (user != null)
+                {
+                    TogglerContext.Users.Attach(user);
+                    TogglerContext.Users.Remove(user);
+                    TogglerContext.SaveChanges();
 
-                return true;
+                    return true;
+                }
             }
             catch (Exception ex)
             {
                 Logger.LogFile($"Failed to delete the User with username = {username}: {ex.Message}");
-
-                return false;
             }
+
+            return false;
         }
 
         public UserModel GetUserById(int id)

@@ -37,7 +37,7 @@ namespace TogglerAPI.BusinessCore
             }
             catch (Exception ex)
             {
-                Logger.LogFile($"Error creating a role: {ex.Message}");
+                Logger.LogFile($"Error creating a Role: {ex.Message}");
 
                 return -1;
             }
@@ -51,7 +51,7 @@ namespace TogglerAPI.BusinessCore
             }
             catch (Exception ex)
             {
-                Logger.LogFile($"Error deleting a role: {ex.Message}");
+                Logger.LogFile($"Error deleting a Role: {ex.Message}");
 
                 return false;
             }
@@ -79,7 +79,7 @@ namespace TogglerAPI.BusinessCore
             }
             catch (Exception ex)
             {
-                Logger.LogFile($"Error getting a role by id = {id}: {ex.Message}");
+                Logger.LogFile($"Error getting a Role by id = {id}: {ex.Message}");
             }
 
             return null;
@@ -112,7 +112,7 @@ namespace TogglerAPI.BusinessCore
             }
             catch (Exception ex)
             {
-                Logger.LogFile($"Error getting a role list: {ex.Message}");
+                Logger.LogFile($"Error getting a Role list: {ex.Message}");
             }
 
             return null;
@@ -138,7 +138,7 @@ namespace TogglerAPI.BusinessCore
             }
             catch (Exception ex)
             {
-                Logger.LogFile($"Error updating a role: {ex.Message}");
+                Logger.LogFile($"Error updating a Role: {ex.Message}");
             }
 
             return false;

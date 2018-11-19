@@ -26,16 +26,10 @@ namespace TogglerAPI.Repositories
 
             try
             {
-                RoleModel role = new RoleModel()
-                {
-                    Name = roleModel.Name,
-                    Description = roleModel.Description
-                };
-
-                TogglerContext.Roles.Add(role);
+                TogglerContext.Roles.Add(roleModel);
                 TogglerContext.SaveChanges();
 
-                return role.RoleId;
+                return roleModel.RoleId;
             }
             catch (Exception ex)
             {
@@ -49,20 +43,23 @@ namespace TogglerAPI.Repositories
         {
             try
             {
-                RoleModel role = new RoleModel() { RoleId = id };
+                RoleModel role = TogglerContext.Roles.Find(id);
 
-                TogglerContext.Roles.Attach(role);
-                TogglerContext.Roles.Remove(role);
-                TogglerContext.SaveChanges();
+                if (role != null)
+                {
+                    TogglerContext.Roles.Attach(role);
+                    TogglerContext.Roles.Remove(role);
+                    TogglerContext.SaveChanges();
 
-                return true;
+                    return true;
+                }
             }
             catch (Exception ex)
             {
                 Logger.LogFile($"Failed to delete the Role with id = {id}: {ex.Message}");
-
-                return false;
             }
+
+            return false;
         }
 
         public RoleModel GetRole(int id)

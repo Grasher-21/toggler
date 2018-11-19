@@ -26,16 +26,10 @@ namespace TogglerAPI.Repositories
 
             try
             {
-                ServiceModel service = new ServiceModel()
-                {
-                    Name = serviceModel.Name,
-                    Version = serviceModel.Version
-                };
-
-                TogglerContext.Services.Add(service);
+                TogglerContext.Services.Add(serviceModel);
                 TogglerContext.SaveChanges();
 
-                return service.ServiceId;
+                return serviceModel.ServiceId;
             }
             catch (Exception ex)
             {
@@ -54,20 +48,23 @@ namespace TogglerAPI.Repositories
 
             try
             {
-                ServiceModel service = new ServiceModel() { ServiceId = id };
+                ServiceModel service = TogglerContext.Services.Find(id);
 
-                TogglerContext.Services.Attach(service);
-                TogglerContext.Services.Remove(service);
-                TogglerContext.SaveChanges();
+                if (service != null)
+                {
+                    TogglerContext.Services.Attach(service);
+                    TogglerContext.Services.Remove(service);
+                    TogglerContext.SaveChanges();
 
-                return true;
+                    return true;
+                }
             }
             catch (Exception ex)
             {
                 Logger.LogFile($"Failed to delete the Service: {ex.Message}");
-
-                return false;
             }
+
+            return false;
         }
 
         public ServiceModel GetService(Guid id)

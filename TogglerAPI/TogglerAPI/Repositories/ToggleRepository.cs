@@ -17,61 +17,94 @@ namespace TogglerAPI.Repositories
             Logger = logger;
         }
 
-        public int CreateToggle(string name, bool value)
+        public int CreateToggle(ToggleModel toggleModel)
         {
-            if (string.IsNullOrWhiteSpace(name))
+            if (toggleModel == null || string.IsNullOrWhiteSpace(toggleModel.Name))
             {
                 throw new ArgumentNullException();
             }
 
-            ToggleModel Toggle = new ToggleModel() { Name = name, Value = value };
+            try
+            {
+                TogglerContext.Toggles.Add(toggleModel);
+                TogglerContext.SaveChanges();
 
-            TogglerContext.Toggles.Add(Toggle);
-            TogglerContext.SaveChanges();
+                return toggleModel.ToggleId;
+            }
+            catch (Exception ex)
+            {
+                Logger.LogFile($"Failed to create the Toggle: {ex.Message}");
 
-            return Toggle.ToggleId;
+                return -1;
+            }
         }
 
         public bool DeleteToggle(int id)
         {
             try
             {
-                ToggleModel Toggle = new ToggleModel() { ToggleId = id };
+                ToggleModel toggerModel = TogglerContext.Toggles.Find(id);
 
-                TogglerContext.Toggles.Attach(Toggle);
-                TogglerContext.Toggles.Remove(Toggle);
-                TogglerContext.SaveChanges();
+                if (toggerModel != null)
+                {
+                    TogglerContext.Toggles.Attach(toggerModel);
+                    TogglerContext.Toggles.Remove(toggerModel);
+                    TogglerContext.SaveChanges();
 
-                return true;
+                    return true;
+                }
             }
             catch (Exception ex)
             {
                 Logger.LogFile($"Failed to delete the Toggle: {ex.Message}");
-
-                return false;
             }
+
+            return false;
         }
 
         public ToggleModel GetToggle(int id)
         {
-            return TogglerContext.Toggles.Find(id);
+            try
+            {
+                return TogglerContext.Toggles.Find(id);
+            }
+            catch (Exception ex)
+            {
+                Logger.LogFile($"Failed to get the Toggle with id = {id}: {ex.Message}");
+
+                return null;
+            }
         }
 
         public List<ToggleModel> GetToggleList()
         {
-            return TogglerContext.Toggles.ToList();
+            try
+            {
+                return TogglerContext.Toggles.ToList();
+            }
+            catch (Exception ex)
+            {
+                Logger.LogFile($"Failed to get the Toggle list: {ex.Message}");
+
+                return null;
+            }
         }
 
-        public bool UpdateToggle(int id, string name, bool value)
+        public bool UpdateToggle(ToggleModel toggleModel)
         {
-            ToggleModel toggle = TogglerContext.Toggles.Find(id);
+            if (toggleModel == null || string.IsNullOrWhiteSpace(toggleModel.Name))
+            {
+                throw new ArgumentNullException();
+            }
 
             try
             {
+                ToggleModel toggle = TogglerContext.Toggles.Find(toggleModel.ToggleId);
+
                 if (toggle != null)
                 {
-                    toggle.Name = name;
-                    toggle.Value = value;
+                    toggle.Name = toggleModel.Name;
+                    toggle.Value = toggleModel.Value;
 
                     TogglerContext.Toggles.Update(toggle);
                     TogglerContext.SaveChanges();

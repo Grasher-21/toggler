@@ -38,7 +38,7 @@ namespace TogglerAPI.BusinessCore
             }
             catch(Exception ex)
             {
-                Logger.LogFile($"Error creating a user: {ex.Message}");
+                Logger.LogFile($"Error creating a User: {ex.Message}");
 
                 return -1;
             }
@@ -52,7 +52,7 @@ namespace TogglerAPI.BusinessCore
             }
             catch (Exception ex)
             {
-                Logger.LogFile($"Error deleting a user by id = {id}: {ex.Message}");
+                Logger.LogFile($"Error deleting a User by id = {id}: {ex.Message}");
 
                 return false;
             }
@@ -71,7 +71,7 @@ namespace TogglerAPI.BusinessCore
             }
             catch (Exception ex)
             {
-                Logger.LogFile($"Error deleting a user by username = {username}: {ex.Message}");
+                Logger.LogFile($"Error deleting a User by username = {username}: {ex.Message}");
 
                 return false;
             }
@@ -100,7 +100,7 @@ namespace TogglerAPI.BusinessCore
             }
             catch (Exception ex)
             {
-                Logger.LogFile($"Error getting a user by id = {id}: {ex.Message}");
+                Logger.LogFile($"Error getting a User by id = {id}: {ex.Message}");
             }
 
             return null;
@@ -134,7 +134,7 @@ namespace TogglerAPI.BusinessCore
             }
             catch (Exception ex)
             {
-                Logger.LogFile($"Error getting a user by username = {username}: {ex.Message}");
+                Logger.LogFile($"Error getting a User by username = {username}: {ex.Message}");
             }
 
             return null;
@@ -168,7 +168,7 @@ namespace TogglerAPI.BusinessCore
             }
             catch (Exception ex)
             {
-                Logger.LogFile($"Error getting a user list: {ex.Message}");
+                Logger.LogFile($"Error getting a User list: {ex.Message}");
             }
 
             return null;
@@ -194,7 +194,7 @@ namespace TogglerAPI.BusinessCore
             }
             catch (Exception ex)
             {
-                Logger.LogFile($"Error updating a user: {ex.Message}");
+                Logger.LogFile($"Error updating a User: {ex.Message}");
             }
 
             return false;
