@@ -77,7 +77,7 @@ XPTO company has a digital platform built under SOA that currently contains (ins
 * Gets list of Toggles available for a service
 > [GET] http://localhost:5000/api/toggleservicepermissions/{id}
 
-* Return StatusCodes
+* Response StatusCodes
 > 400 - Bad Request
 
 > 401 - Invalid Credentials
@@ -87,7 +87,7 @@ XPTO company has a digital platform built under SOA that currently contains (ins
 > 200 - Toggle list returned
 
 
-########## ########## ########## ########## ##########
+########## ########## ##########
 
 
 All other Endpoints requires Administrator privileges! Make sure to have the following content in your Request Header!
@@ -99,7 +99,7 @@ All other Endpoints requires Administrator privileges! Make sure to have the fol
 	> Password:Password
 
 	
-########## ########## ########## ########## ##########
+########## ########## ##########
 
 
 * Creates new Role
@@ -111,7 +111,7 @@ All other Endpoints requires Administrator privileges! Make sure to have the fol
 > 	"Description": "RoleTesteabc"
 > }
 
-* Return StatusCodes
+* Response StatusCodes
 > 400 - Bad Request
 
 > 401 - Invalid Credentials
@@ -123,13 +123,13 @@ All other Endpoints requires Administrator privileges! Make sure to have the fol
 > 201 - Created - RoleID returned
 
 
-########## ########## ########## ########## ##########
+########## ########## ##########
 
 
 * Deletes Role by ID
 > [DELETE] http://localhost:5000/api/roles/{id}
 
-* Return StatusCodes
+* Response StatusCodes
 > 401 - Invalid Credentials
 
 > 403 - No Permission
@@ -139,13 +139,13 @@ All other Endpoints requires Administrator privileges! Make sure to have the fol
 > 204 - No Content
 
 
-########## ########## ########## ########## ##########
+########## ########## ##########
 
 
 * Gets Role by ID
 > [GET] http://localhost:5000/api/roles/{id}
 
-* Return StatusCodes
+* Response StatusCodes
 > 401 - Invalid Credentials
 
 > 403 - No Permission
@@ -155,13 +155,13 @@ All other Endpoints requires Administrator privileges! Make sure to have the fol
 > 200 - Role returned
 
 
-########## ########## ########## ########## ##########
+########## ########## ##########
 
 
 * Gets list of Roles
 > [GET] http://localhost:5000/api/roles
 
-* Return StatusCodes
+* Response StatusCodes
 > 401 - Invalid Credentials
 
 > 403 - No Permission
@@ -171,7 +171,7 @@ All other Endpoints requires Administrator privileges! Make sure to have the fol
 > 200 - Role list returned
 
 
-########## ########## ########## ########## ##########
+########## ########## ##########
 
 
 * Updates a Role by ID
@@ -184,7 +184,7 @@ All other Endpoints requires Administrator privileges! Make sure to have the fol
 > 	"Description": "TemporaryRole"
 > }
 
-* Return StatusCodes
+* Response StatusCodes
 > 400 - Bad Request
 
 > 401 - Invalid Credentials
@@ -196,7 +196,7 @@ All other Endpoints requires Administrator privileges! Make sure to have the fol
 > 204 - No Content
 
 
-########## ########## ########## ########## ##########
+########## ########## ##########
 
 
 * Creates an User
@@ -209,7 +209,7 @@ All other Endpoints requires Administrator privileges! Make sure to have the fol
 > 	"password": "Password"
 > }
 
-* Return StatusCodes
+* Response StatusCodes
 > 400 - Bad Request
 
 > 401 - Invalid Credentials
@@ -221,13 +221,13 @@ All other Endpoints requires Administrator privileges! Make sure to have the fol
 > 201 - Created - UserID returned
 
 
-########## ########## ########## ########## ##########
+########## ########## ##########
 
 
 * Deletes an User by ID
 > [DELETE] http://localhost:5000/api/users/{id}
 
-* Return StatusCodes
+* Response StatusCodes
 > 401 - Invalid Credentials
 
 > 403 - No Permission
@@ -237,13 +237,13 @@ All other Endpoints requires Administrator privileges! Make sure to have the fol
 > 204 - No Content
 
 
-########## ########## ########## ########## ##########
+########## ########## ##########
 
 
 * Deletes an User by Username
 > [DELETE] http://localhost:5000/api/users/username/{username}
 
-* Return StatusCodes
+* Response StatusCodes
 > 400 - Bad Request
 
 > 401 - Invalid Credentials
@@ -255,13 +255,13 @@ All other Endpoints requires Administrator privileges! Make sure to have the fol
 > 204 - No Content
 
 
-########## ########## ########## ########## ##########
+########## ########## ##########
 
 
 * Gets list of all Users' details
 > [GET] http://localhost:5000/api/users
 
-* Return StatusCodes
+* Response StatusCodes
 > 401 - Invalid Credentials
 
 > 403 - No Permission
@@ -271,13 +271,13 @@ All other Endpoints requires Administrator privileges! Make sure to have the fol
 > 200 - User list returned
 
 
-########## ########## ########## ########## ##########
+########## ########## ##########
 
 
 * Gets User's details by ID
 > [GET] http://localhost:5000/api/users/{id}
 
-* Return StatusCodes
+* Response StatusCodes
 > 401 - Invalid Credentials
 
 > 403 - No Permission
@@ -287,13 +287,13 @@ All other Endpoints requires Administrator privileges! Make sure to have the fol
 > 200 - User returned
 
 
-########## ########## ########## ########## ##########
+########## ########## ##########
 
 
 * Gets User's details by Username
 > [GET] http://localhost:5000/api/users/username/{username}
 
-* Return StatusCodes
+* Response StatusCodes
 > 400 - Bad Request
 
 > 401 - Invalid Credentials
@@ -305,7 +305,7 @@ All other Endpoints requires Administrator privileges! Make sure to have the fol
 > 200 - User returned
 
 
-########## ########## ########## ########## ##########
+########## ########## ##########
 
 
 * Updates User's details
@@ -318,7 +318,7 @@ All other Endpoints requires Administrator privileges! Make sure to have the fol
 > 	"password": "Password12121"
 > }
 
-* Return StatusCodes
+* Response StatusCodes
 > 400 - Bad Request
 
 > 401 - Invalid Credentials
@@ -330,7 +330,7 @@ All other Endpoints requires Administrator privileges! Make sure to have the fol
 > 204 - No Content
 
 
-########## ########## ########## ########## ##########
+########## ########## ##########
 
 
 * Creates a new Service
@@ -342,7 +342,7 @@ All other Endpoints requires Administrator privileges! Make sure to have the fol
 > 	"version": "1.1.1.0.1"
 > }
 
-* Return StatusCodes
+* Response StatusCodes
 > 400 - Bad Request
 
 > 401 - Invalid Credentials
@@ -354,13 +354,13 @@ All other Endpoints requires Administrator privileges! Make sure to have the fol
 > 201 - Created - ServiceID returned
 
 
-########## ########## ########## ########## ##########
+########## ########## ##########
 
 
 * Deletes a Service by ID
 > [DELETE] http://localhost:5000/api/services/{id}
 
-* Return StatusCodes
+* Response StatusCodes
 > 400 - Bad Request
 
 > 401 - Invalid Credentials
@@ -372,13 +372,13 @@ All other Endpoints requires Administrator privileges! Make sure to have the fol
 > 204 - No Content
 
 
-########## ########## ########## ########## ##########
+########## ########## ##########
 
 
 * Gets details for a Service
 > [GET] http://localhost:5000/api/services/{id}
 
-* Return StatusCodes
+* Response StatusCodes
 > 400 - Bad Request
 
 > 401 - Invalid Credentials
@@ -390,13 +390,13 @@ All other Endpoints requires Administrator privileges! Make sure to have the fol
 > 200 - Service returned
 
 
-########## ########## ########## ########## ##########
+########## ########## ##########
 
 
 * Gets list of Services
 > [GET] http://localhost:5000/api/services/
 
-* Return StatusCodes
+* Response StatusCodes
 > 401 - Invalid Credentials
 
 > 403 - No Permission
@@ -406,7 +406,7 @@ All other Endpoints requires Administrator privileges! Make sure to have the fol
 > 200 - Service list returned
 
 
-########## ########## ########## ########## ##########
+########## ########## ##########
 
 
 * Updates a Service
@@ -419,7 +419,7 @@ All other Endpoints requires Administrator privileges! Make sure to have the fol
 > 	"version": "1.21.2"
 > }
 
-* Return StatusCodes
+* Response StatusCodes
 > 400 - Bad Request
 
 > 401 - Invalid Credentials
@@ -431,7 +431,7 @@ All other Endpoints requires Administrator privileges! Make sure to have the fol
 > 204 - No Content
 
 
-########## ########## ########## ########## ##########
+########## ########## ##########
 
 
 * Creates a Toggle
@@ -443,7 +443,7 @@ All other Endpoints requires Administrator privileges! Make sure to have the fol
 > 	"value": false
 > }
 
-* Return StatusCodes
+* Response StatusCodes
 > 400 - Bad Request
 
 > 401 - Invalid Credentials
@@ -455,13 +455,13 @@ All other Endpoints requires Administrator privileges! Make sure to have the fol
 > 201 - Created - ToggleID returned
 
 
-########## ########## ########## ########## ##########
+########## ########## ##########
 
 
 * Deletes a Toggler by ID
 > [DELETE] http://localhost:5000/api/toggles/{id}
 
-* Return StatusCodes
+* Response StatusCodes
 > 401 - Invalid Credentials
 
 > 403 - No Permission
@@ -471,13 +471,13 @@ All other Endpoints requires Administrator privileges! Make sure to have the fol
 > 204 - No Content
 
 
-########## ########## ########## ########## ##########
+########## ########## ##########
 
 
 * Gets Toggle by ID
 > [GET] http://localhost:5000/api/toggles/{id}
 
-* Return StatusCodes
+* Response StatusCodes
 > 401 - Invalid Credentials
 
 > 403 - No Permission
@@ -487,13 +487,13 @@ All other Endpoints requires Administrator privileges! Make sure to have the fol
 > 200 - Toggle returned
 
 
-########## ########## ########## ########## ##########
+########## ########## ##########
 
 
 * Gets Toggle list
 > [GET] http://localhost:5000/api/toggles
 
-* Return StatusCodes
+* Response StatusCodes
 > 401 - Invalid Credentials
 
 > 403 - No Permission
@@ -503,7 +503,7 @@ All other Endpoints requires Administrator privileges! Make sure to have the fol
 > 200 - Toggle list returned
 
 
-########## ########## ########## ########## ##########
+########## ########## ##########
 
 
 * Updates a Toggle
@@ -516,7 +516,7 @@ All other Endpoints requires Administrator privileges! Make sure to have the fol
 > 	"value": true
 > }
 
-* Return StatusCodes
+* Response StatusCodes
 > 400 - Bad Request
 
 > 401 - Invalid Credentials
@@ -528,7 +528,7 @@ All other Endpoints requires Administrator privileges! Make sure to have the fol
 > 204 - No Content
 
 
-########## ########## ########## ########## ##########
+########## ########## ##########
 
 
 * Creates Toggle-Service Permissions
@@ -542,7 +542,7 @@ All other Endpoints requires Administrator privileges! Make sure to have the fol
 > 	"overridenvalue":0
 > }
 
-* Return StatusCodes
+* Response StatusCodes
 > 400 - Bad Request
 
 > 401 - Invalid Credentials
@@ -554,13 +554,13 @@ All other Endpoints requires Administrator privileges! Make sure to have the fol
 > 201 - Created
 
 
-########## ########## ########## ########## ##########
+########## ########## ##########
 
 
 * Deletes Toggle-Service Permission
 > [DELETE] http://localhost:5000/api/toggleservicepermissions/toggleid/{id}/serviceid/{id}
 
-* Return StatusCodes
+* Response StatusCodes
 > 400 - Bad Request
 
 > 401 - Invalid Credentials
@@ -572,13 +572,13 @@ All other Endpoints requires Administrator privileges! Make sure to have the fol
 > 204 - No Content
 
 
-########## ########## ########## ########## ##########
+########## ########## ##########
 
 
 * Gets Permission details for a Toggle-Service
 > [GET] http://localhost:5000/api/toggleservicepermissions/toggleid/{id}/serviceid/{id}
 
-* Return StatusCodes
+* Response StatusCodes
 > 400 - Bad Request
 
 > 401 - Invalid Credentials
@@ -590,13 +590,13 @@ All other Endpoints requires Administrator privileges! Make sure to have the fol
 > 200 - Permission details for a Toggle-Service returned
 
 
-########## ########## ########## ########## ##########
+########## ########## ##########
 
 
 * Gets Permissions' list for Toggles-Services
 > [GET] http://localhost:5000/api/toggleservicepermissions/
 
-* Return StatusCodes
+* Response StatusCodes
 > 401 - Invalid Credentials
 
 > 403 - No Permission
@@ -606,7 +606,7 @@ All other Endpoints requires Administrator privileges! Make sure to have the fol
 > 200 - List with Permissions' details for all Toggles-Services returned
 
 
-########## ########## ########## ########## ##########
+########## ########## ##########
 
 
 * Updates Permissions for Toggle-Service
@@ -620,7 +620,7 @@ All other Endpoints requires Administrator privileges! Make sure to have the fol
 > 	"overridenvalue":0
 > }
 
-* Return StatusCodes
+* Response StatusCodes
 > 400 - Bad Request
 
 > 401 - Invalid Credentials
