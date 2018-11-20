@@ -44,7 +44,7 @@ namespace TogglerAPI.Controllers
 
             if (!ToggleServicePermissionService.CreatePermission(toggleServicePermissionRequestModel))
             {
-                return StatusCode(500);
+                return StatusCode(404);
             }
 
             return StatusCode(201);
@@ -53,6 +53,11 @@ namespace TogglerAPI.Controllers
         [HttpDelete("toggleid/{id}/serviceid/{serviceId}")]
         public ActionResult DeleteToggleServicePermission(int id, Guid serviceId)
         {
+            if (serviceId == Guid.Empty)
+            {
+                return StatusCode(400);
+            }
+
             int result = ValidatorService.ValidateUserCredentials(Request.Headers[Username], Request.Headers[Password]);
 
             if (result == -1)
@@ -76,9 +81,14 @@ namespace TogglerAPI.Controllers
         [HttpGet("{serviceId}")]
         public ActionResult<List<ToggleResponseModel>> GetTogglesForServiceId(Guid serviceId)
         {
-            if (!ValidatorService.ValidateServicePermissions(serviceId))
+            if (serviceId == Guid.Empty)
             {
-                return StatusCode(403);
+                return StatusCode(400);
+            }
+
+            if (!ValidatorService.ValidateServiceCredentials(serviceId))
+            {
+                return StatusCode(401);
             }
 
             List<ToggleResponseModel> toggleResponseModelList = ToggleServicePermissionService.GetTogglesListForServiceId(serviceId);
@@ -94,6 +104,11 @@ namespace TogglerAPI.Controllers
         [HttpGet("toggleid/{id}/serviceid/{serviceId}")]
         public ActionResult<ToggleServicePermissionResponseModel> GetToggleServicePermission(int id, Guid serviceId)
         {
+            if (serviceId == Guid.Empty)
+            {
+                return StatusCode(400);
+            }
+
             int result = ValidatorService.ValidateUserCredentials(Request.Headers[Username], Request.Headers[Password]);
 
             if (result == -1)

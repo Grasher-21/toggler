@@ -47,7 +47,7 @@ namespace TogglerAPI.BusinessCore
             return true;
         }
 
-        public bool ValidateServicePermissions(Guid serviceId)
+        public bool ValidateServiceCredentials(Guid serviceId)
         {
             if (serviceId == Guid.Empty)
             {

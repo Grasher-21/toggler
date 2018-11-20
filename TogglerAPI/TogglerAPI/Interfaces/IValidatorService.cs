@@ -6,6 +6,6 @@ namespace TogglerAPI.Interfaces
     {
         int ValidateUserCredentials(string username, string password);
         bool ValidateUserPermissions(int roleId);
-        bool ValidateServicePermissions(Guid serviceId);
+        bool ValidateServiceCredentials(Guid serviceId);
     }
 }
