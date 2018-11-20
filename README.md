@@ -7,7 +7,7 @@
 - Clone this repository into your system
 - I used SQL Express in my machine, thus the SQL Connection is "Server=localhost\\SQLEXPRESS;Database=Toggler;Trusted_Connection=True;"
 - You may change this SQL ConnectionString in the appsettings.json for your SQL Server instance
-- Assuming you cloned the Code with "migrations" included, run the following command:
+- Assuming you cloned the Code with migrations included, open Package Manager Console and run the following command so your Database is configured properly:
 	> update-database -context TogglerContext
 - Incase you don't have any "migrations" in your system, do the following:
 	- Open Package Manager Console and run the following command:
@@ -16,7 +16,7 @@
 	- Open the File "TogglerMigration.txt" that is in the folder "Configurations" and copy all it's content and replace the generated class in Visual Studio
 	- Go to Package Manager Console and run the following command:
 		> update-database -context TogglerContext
-	- After a little bit it will create automatically the Database, all the tables and the relationships
+- After a little bit it will create automatically the Database, all the tables and the relationships
 - Open SQL Server Management Studio or whatever tool you may use and populate the database with dummy data. This dummy data can be found in the file "SQL Dummy Data.txt" inside the same "Configurations" folder
 - Follow the steps in the "SQL Dummy Data.txt" file
 
