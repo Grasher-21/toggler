@@ -26,6 +26,7 @@ XPTO company has a digital platform built under SOA that currently contains (ins
 * Users with the Administrator role will be able to manage everything from creating, updating and deleting all Users, Roles, Services, Toggles and Toggle's permissions for a specific Service
 * All other Users will have no privileges using the Web API
 * Only the Services that are registered by their UniqueIdentifier in the Database will have access to their Toggles when invoking TogglerAPI. This UniqueIdentifier needs to be passed in the Endpoint. Check the [ENDPOINT] list below.
+* Created TogglerAPITests project where Tests will be created. So far, only RoleService has defined tests though...
 
 [MISSING FEATURES -> TODO LIST]
 * Replace headers verifications with OAuth or any other kind of Token instead of passing Username and Password on every request
